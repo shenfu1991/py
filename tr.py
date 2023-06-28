@@ -5,7 +5,7 @@ from joblib import dump
 import pandas as pd
 
 # 加载数据
-data = pd.read_csv('/Users/xuanyuan/Downloads/ads/merged_30m.csv')
+data = pd.read_csv('/Users/xuanyuan/py/merged_3m_mix.csv')
 
 # 创建并拟合 LabelEncoder
 le = LabelEncoder()

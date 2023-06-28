@@ -4,7 +4,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import LabelEncoder
 
 # 加载CSV数据
-df = pd.read_csv('/Users/xuanyuan/Downloads/ads/merged_all.csv') # 请将'your_file.csv'替换为你的文件路径
+df = pd.read_csv('/Users/xuanyuan/py/merged_3m_mix.csv') # 请将'your_file.csv'替换为你的文件路径
 
 # 对目标进行编码，因为它是分类任务
 le = LabelEncoder()
