@@ -14,6 +14,9 @@ le5m = load('label_encoder_5m.joblib')
 le15m = load('label_encoder_15m.joblib')
 le30m = load('label_encoder_30m.joblib')
 
+model_all = load('model_all.joblib')
+leall = load('label_encoder_all.joblib')
+
 
 
 @app.route('/predict_3m', methods=['POST'])
@@ -31,6 +34,10 @@ def predict_15m():
 @app.route('/predict_30m', methods=['POST'])
 def predict_30m():
     return predict(model_30m,le30m)
+
+@app.route('/predict_all', methods=['POST'])
+def predict_all():
+    return predict(model_all,leall)
 
 def predict(model,le):
     # 获取请求的数据

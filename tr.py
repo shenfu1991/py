@@ -4,8 +4,16 @@ from sklearn.preprocessing import LabelEncoder
 from joblib import dump
 import pandas as pd
 
+from datetime import datetime
+
+# 获取当前时间
+start_time = datetime.now()
+
+# 打印当前时间
+print("当前时间:", start_time)
+
 # 加载数据
-data = pd.read_csv('/Users/xuanyuan/py/merged_3m_mix.csv')
+data = pd.read_csv('/Users/xuanyuan/py/merged_3m.csv')
 
 # 创建并拟合 LabelEncoder
 le = LabelEncoder()
@@ -25,3 +33,11 @@ print("Testing accuracy: ", clf.score(X_test, y_test))
 # 保存模型和 LabelEncoder
 dump(clf, 'model_30m.joblib')
 dump(le, 'label_encoder_30m.joblib')
+
+
+# 获取当前时间
+end_time = datetime.now()
+
+# 计算并打印执行时间
+execution_time = end_time - start_time
+print("脚本执行耗时: ",execution_time, "秒")
