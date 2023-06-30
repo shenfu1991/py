@@ -72,14 +72,19 @@ def predict(model,le):
     # 创建一个DataFrame，明确指定列的顺序
     df = pd.DataFrame(data, columns=feature_names, index=[0])
 
+    print(df)
+
     # 使用模型进行预测
     prediction = model.predict(df)
 
     # 使用 LabelEncoder 将整数编码转换回类别标签
     prediction = le.inverse_transform(prediction)
 
+    print(prediction)
     # 将预测结果转化为列表
     prediction = prediction.tolist()
+
+    print(prediction)
 
     # 返回JSON格式的预测结果
     return jsonify(prediction)

@@ -13,7 +13,7 @@ start_time = datetime.now()
 print("当前时间:", start_time)
 
 # 加载数据
-data = pd.read_csv('/Users/xuanyuan/py/merged_30mv2.csv')
+data = pd.read_csv('merged_15mv2.csv')
 
 # 创建并拟合 LabelEncoder
 le = LabelEncoder()
