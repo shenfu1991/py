@@ -5,7 +5,7 @@ import pandas as pd
 column_names = ["timestamp","current",'open', 'high', 'low', 'rate', 'volume', 'volatility', 'sharp', 'signal']
 
 # 指定文件夹路径
-folder_path = "/Users/xuanyuan/Downloads/6"
+folder_path = "/Users/xuanyuan/Downloads/5mv2"
 
 # 遍历文件夹内所有的csv文件
 for filename in os.listdir(folder_path):

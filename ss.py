@@ -14,8 +14,16 @@ le5m = load('label_encoder_5m.joblib')
 le15m = load('label_encoder_15m.joblib')
 le30m = load('label_encoder_30m.joblib')
 
-model_all = load('model_all.joblib')
-leall = load('label_encoder_all.joblib')
+model_3mv2 = load('model_3mv2.joblib')
+model_5mv2 = load('model_5mv2.joblib')
+model_15mv2 = load('model_15mv2.joblib')
+model_30mv2 = load('model_30mv2.joblib')
+le3mv2 = load('label_encoder_3mv2.joblib')
+le5mv2 = load('label_encoder_5mv2.joblib')
+le15mv2 = load('label_encoder_15mv2.joblib')
+le30mv2 = load('label_encoder_30mv2.joblib')
+
+
 
 
 
@@ -35,9 +43,24 @@ def predict_15m():
 def predict_30m():
     return predict(model_30m,le30m)
 
-@app.route('/predict_all', methods=['POST'])
-def predict_all():
-    return predict(model_all,leall)
+
+@app.route('/predict_3mv2', methods=['POST'])
+def predict_3mv2():
+    return predict(model_3mv2,le3mv2)
+
+@app.route('/predict_5mv2', methods=['POST'])
+def predict_5mv2():
+    return predict(model_5mv2,le5mv2)
+
+@app.route('/predict_15mv2', methods=['POST'])
+def predict_15mv2():
+    return predict(model_15mv2,le15mv2)
+
+@app.route('/predict_30mv2', methods=['POST'])
+def predict_30mv2():
+    return predict(model_30mv2,le30mv2)
+
+
 
 def predict(model,le):
     # 获取请求的数据
