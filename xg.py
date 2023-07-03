@@ -12,8 +12,13 @@ start_time = datetime.now()
 # 打印当前时间
 print("当前时间:", start_time)
 
+
+path = '/Users/xuanyuan/py/merged_4hv3.csv'
+
+print(path)
+
 # 读取数据
-df = pd.read_csv('/Users/xuanyuan/py/merged_3mv2.csv')
+df = pd.read_csv(path)
 
 # 准备数据
 features = ['open', 'high', 'low', 'rate', 'volume', 'volatility', 'sharp', 'signal']
@@ -23,7 +28,7 @@ y = df['result']
 # Label encoding
 le = LabelEncoder()
 y = le.fit_transform(y)
-dump(le, 'label_encoder_3mv2.joblib') # save the label encoder
+dump(le, 'label_encoder.joblib') # save the label encoder
 
 # Split the data
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
@@ -38,7 +43,7 @@ print('Training accuracy: ', best_model.score(X_train, y_train))
 print("Testing accuracy: ", best_model.score(X_test, y_test))
 
 # 保存模型
-dump(best_model, 'model_3mv2.joblib')
+dump(best_model, 'model.joblib')
 
 
 # 获取当前时间
