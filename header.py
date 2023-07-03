@@ -2,7 +2,7 @@ import os
 import pandas as pd
 
 # 指定你要查找的文件夹路径
-directory = '/Users/xuanyuan/Downloads/all/15mv2'
+directory = '/Users/xuanyuan/Downloads/all/5mv3'
 
 # 需要检查的列名
 columns = ['timestamp', 'current', 'open', 'high', 'low', 'rate', 'volume', 'volatility', 'sharp', 'signal']

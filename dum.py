@@ -2,7 +2,7 @@ import os
 import pandas as pd
 
 # 指定文件夹路径
-folder_path = "/Users/xuanyuan/Documents/csv"
+folder_path = "/Users/xuanyuan/py/4h"
 
 # 遍历文件夹内所有的csv文件
 for filename in os.listdir(folder_path):

@@ -2,7 +2,9 @@ import pandas as pd
 import glob
 
 # 设置csv文件的路径
-path = r'/Users/xuanyuan/Documents/30m 2/' # 只需要修改此处为你的目录路径
+path = r'/Users/xuanyuan/py/4h/' # 只需要修改此处为你的目录路径
+
+print(path)
 
 # 获取所有csv文件
 all_files = glob.glob(path + "/*.csv")
