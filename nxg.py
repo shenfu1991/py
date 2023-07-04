@@ -12,7 +12,7 @@ start_time = datetime.now()
 # 打印当前时间
 print("当前时间:", start_time)
 
-path = '/Users/xuanyuan/py/merged_4h.csv'
+path = '/Users/xuanyuan/py/merged_4hv6.csv'
 
 print(path)
 
@@ -20,7 +20,9 @@ print(path)
 df = pd.read_csv(path)
 
 # 准备数据
-features = ['open', 'high', 'low', 'rate', 'volume', 'volatility', 'sharp', 'signal']
+#features = ['open', 'high', 'low', 'rate', 'volume', 'volatility', 'sharp', 'signal']
+features = ['current','avg','open', 'high', 'low', 'rate', 'volume', 'volatility', 'sharp', 'signal']
+#
 X = df[features]
 y = df['result']
 
@@ -31,7 +33,7 @@ X = scaler.fit_transform(X)
 # Label encoding
 le = LabelEncoder()
 y = le.fit_transform(y)
-dump(le, 'label_encoder_3mv2.joblib') # save the label encoder
+dump(le, 'label_encoder_.joblib') # save the label encoder
 
 # 过采样处理
 smote = SMOTE(random_state=0)
@@ -49,7 +51,7 @@ print('Training accuracy: ', best_model.score(X_train, y_train))
 print("Testing accuracy: ", best_model.score(X_test, y_test))
 
 # 保存模型
-dump(best_model, 'model_3mv2.joblib')
+dump(best_model, 'model_.joblib')
 
 # 获取当前时间
 end_time = datetime.now()

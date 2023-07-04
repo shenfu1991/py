@@ -5,25 +5,25 @@ from joblib import load
 app = Flask(__name__)
 
 # 加载模型和 LabelEncoder
-model_3mv3 = load('model_3mv3.joblib')
-model_5mv3 = load('model_5mv3.joblib')
-model_15mv3 = load('model_15mv3.joblib')
-model_30mv3 = load('model_30mv3.joblib')
-model_1hv3 = load('model_1hv3.joblib')
-model_4hv3 = load('model_4hv3.joblib')
-le3mv3 = load('label_encoder_3mv3.joblib')
-le5mv3 = load('label_encoder_5mv3.joblib')
-le15mv3 = load('label_encoder_15mv3.joblib')
-le30mv3 = load('label_encoder_30mv3.joblib')
-le1hv3 = load('label_encoder_1hv3.joblib')
-le4hv3 = load('label_encoder_4hv3.joblib')
+model_3mv6 = load('model_3mv6.joblib')
+model_5mv6 = load('model_5mv6.joblib')
+model_15mv6 = load('model_15mv6.joblib')
+model_30mv6 = load('model_30mv6.joblib')
+model_1hv6 = load('model_1hv6.joblib')
+model_4hv6 = load('model_4hv6.joblib')
+le3mv6 = load('label_encoder_3mv6.joblib')
+le5mv6 = load('label_encoder_5mv6.joblib')
+le15mv6 = load('label_encoder_15mv6.joblib')
+le30mv6 = load('label_encoder_30mv6.joblib')
+le1hv6 = load('label_encoder_1hv6.joblib')
+le4hv6 = load('label_encoder_4hv6.joblib')
 
 model_3mv4 = load('model_3mv4.joblib')
 model_5mv4 = load('model_5mv4.joblib')
 model_15mv4 = load('model_15mv4.joblib')
 model_30mv4 = load('model_30mv4.joblib')
-model_1hv4 = load('model_1hv3.joblib')
-model_4hv4 = load('model_4hv3.joblib')
+model_1hv4 = load('model_1hv6.joblib')
+model_4hv4 = load('model_4hv6.joblib')
 le3mv4 = load('label_encoder_3mv4.joblib')
 le5mv4 = load('label_encoder_5mv4.joblib')
 le15mv4 = load('label_encoder_15mv4.joblib')
@@ -37,62 +37,71 @@ le4hv4 = load('label_encoder_4hv4.joblib')
 
 @app.route('/predict_3m', methods=['POST'])
 def predict_3m():
-    return predict(model_3mv3,le3mv3)
+    return predict(model_3mv6,le3mv6,True)
 
 @app.route('/predict_5m', methods=['POST'])
 def predict_5m():
-    return predict(model_5mv3,le5mv3)
+    return predict(model_5mv6,le5mv6,True)
 
 @app.route('/predict_15m', methods=['POST'])
 def predict_15m():
-    return predict(model_15mv3,le15mv3)
+    return predict(model_15mv6,le15mv6,True)
 
 @app.route('/predict_30m', methods=['POST'])
 def predict_30m():
-    return predict(model_30mv3,le30mv3)
+    return predict(model_30mv6,le30mv6,True)
 
 @app.route('/predict_1h', methods=['POST'])
 def predict_1h():
-    return predict(model_1hv3,le1hv3)
+    return predict(model_1hv6,le1hv6,True)
 
 @app.route('/predict_4h', methods=['POST'])
 def predict_4h():
-    return predict(model_4hv3,le4hv3)
+    return predict(model_4hv6,le4hv6,True)
 
 
 @app.route('/predict_3mv4', methods=['POST'])
 def predict_3mv4():
-    return predict(model_3mv4,le3mv4)
+    return predict(model_3mv4,le3mv4,False)
 
 @app.route('/predict_5mv4', methods=['POST'])
 def predict_5mv4():
-    return predict(model_5mv4,le5mv4)
+    return predict(model_5mv4,le5mv4,False)
 
 @app.route('/predict_15mv4', methods=['POST'])
 def predict_15mv4():
-    return predict(model_15mv4,le15mv4)
+    return predict(model_15mv4,le15mv4,False)
 
 @app.route('/predict_30mv4', methods=['POST'])
 def predict_30mv4():
-    return predict(model_30mv4,le30mv4)
+    return predict(model_30mv4,le30mv4,False)
 
 @app.route('/predict_1hv4', methods=['POST'])
 def predict_1hv4():
-    return predict(model_1hv4,le1hv4)
+    return predict(model_1hv4,le1hv4,False)
 
 @app.route('/predict_4hv4', methods=['POST'])
 def predict_4hv4():
-    return predict(model_4hv4,le4hv4)
+    return predict(model_4hv4,le4hv4,False)
 
 
 
-
-def predict(model,le):
+def predict(model,le,isV6):
     # 获取请求的数据
     data = request.json
 
+    print(data)
+
     # 以相同的顺序指定特征名称
     feature_names = ['open', 'high', 'low', 'rate', 'volume', 'volatility', 'sharp', 'signal']
+
+    if isV6:
+        feature_names = ['current','avg','open', 'high', 'low', 'rate', 'volume', 'volatility', 'sharp', 'signal']
+    else
+        if 'current' in data:
+        del data['current']
+    if 'avg' in data:
+        del data['avg']    
 
     # 创建一个DataFrame，明确指定列的顺序
     df = pd.DataFrame(data, columns=feature_names, index=[0])

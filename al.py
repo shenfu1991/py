@@ -29,10 +29,10 @@ class CustomDataset(Dataset):
 
 
 # Create custom dataset
-dataset = CustomDataset('merged_30mv2.csv')
+dataset = CustomDataset('merged_4h.csv')
 
 # Create data loader
-dataloader = DataLoader(dataset, batch_size=32, shuffle=True)
+dataloader = DataLoader(dataset, batch_size=4, shuffle=True)
 
 # Define model architecture
 model = nn.Sequential(
@@ -43,10 +43,10 @@ model = nn.Sequential(
 
 # Define loss function and optimizer
 criterion = nn.CrossEntropyLoss()
-optimizer = optim.Adam(model.parameters(), lr=0.001)
+optimizer = optim.Adam(model.parameters(), lr=0.01)
 
 # Training loop
-for epoch in range(10):
+for epoch in range(100):
     running_loss = 0.0
     correct = 0
     total = 0
