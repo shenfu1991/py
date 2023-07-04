@@ -1,7 +1,7 @@
 import pandas as pd
 
 # 读取csv文件
-df = pd.read_csv('merged_3m.csv')
+df = pd.read_csv('merged_1h.csv')
 
 counts = df['result'].value_counts()
 max_count = counts[counts.index != 'none'].max()
