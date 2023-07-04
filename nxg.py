@@ -12,8 +12,12 @@ start_time = datetime.now()
 # 打印当前时间
 print("当前时间:", start_time)
 
+path = '/Users/xuanyuan/py/merged_4h.csv'
+
+print(path)
+
 # 读取数据
-df = pd.read_csv('/Users/xuanyuan/py/merged_15mv3.csv')
+df = pd.read_csv(path)
 
 # 准备数据
 features = ['open', 'high', 'low', 'rate', 'volume', 'volatility', 'sharp', 'signal']
