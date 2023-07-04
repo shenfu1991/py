@@ -52,19 +52,27 @@ test_data = LoadData(features_test, target_test)
 trainloader = DataLoader(train_data, batch_size=32, shuffle=True)
 testloader = DataLoader(test_data, batch_size=32, shuffle=False)
 
-# 定义网络结构
 class Net(nn.Module):
     def __init__(self):
         super(Net, self).__init__()
-        self.fc1 = nn.Linear(8, 32)
-        self.fc2 = nn.Linear(32, 64)
-        self.fc3 = nn.Linear(64, 4) # output size is 4 as we have 4 unique values in 'result'
+        self.fc1 = nn.Linear(8, 64) # 扩大第一层的大小
+        self.fc2 = nn.Linear(64, 128)
+        self.dropout1 = nn.Dropout(0.5) # 添加dropout层，防止过拟合
+        self.fc3 = nn.Linear(128, 128)
+        self.dropout2 = nn.Dropout(0.5)
+        self.fc4 = nn.Linear(128, 64)
+        self.fc5 = nn.Linear(64, 4) # output size is 4 as we have 4 unique values in 'result'
         
     def forward(self, x):
         x = torch.relu(self.fc1(x))
         x = torch.relu(self.fc2(x))
-        x = self.fc3(x)
+        x = self.dropout1(x)
+        x = torch.relu(self.fc3(x))
+        x = self.dropout2(x)
+        x = torch.relu(self.fc4(x))
+        x = self.fc5(x)
         return x
+
 
 # 初始化模型
 model = Net()
@@ -74,7 +82,7 @@ criterion = nn.CrossEntropyLoss()
 optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)
 
 # 训练模型
-for epoch in range(10):  
+for epoch in range(100):  
     running_loss = 0.0
     for i, data in enumerate(trainloader, 0):
         inputs, labels = data
