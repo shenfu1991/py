@@ -12,7 +12,7 @@ start_time = datetime.now()
 # 打印当前时间
 print("当前时间:", start_time)
 
-path = '/Users/xuanyuan/py/merged_4hv6.csv'
+path = '/Users/xuanyuan/py/merged_15mv7.csv'
 
 print(path)
 

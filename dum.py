@@ -2,7 +2,7 @@ import os
 import pandas as pd
 
 # 指定文件夹路径
-folder_path = "/Users/xuanyuan/py/1h"
+folder_path = "/Users/xuanyuan/py/15m"
 
 print(folder_path)
 
@@ -19,3 +19,6 @@ for filename in os.listdir(folder_path):
         
         # 将处理后的数据写回csv
         df.to_csv(file_path, index=False)
+
+
+print('done')
