@@ -22,8 +22,8 @@ model_3mv4 = load('model_3mv4.joblib')
 model_5mv4 = load('model_5mv4.joblib')
 model_15mv4 = load('model_15mv4.joblib')
 model_30mv4 = load('model_30mv4.joblib')
-model_1hv4 = load('model_1hv6.joblib')
-model_4hv4 = load('model_4hv6.joblib')
+model_1hv4 = load('model_1hv4.joblib')
+model_4hv4 = load('model_4hv4.joblib')
 le3mv4 = load('label_encoder_3mv4.joblib')
 le5mv4 = load('label_encoder_5mv4.joblib')
 le15mv4 = load('label_encoder_15mv4.joblib')
@@ -86,27 +86,18 @@ def predict_4hv4():
 
 
 
-def predict(model,le,isV6):
+def predict(model, le, isV6):
     # 获取请求的数据
     data = request.json
 
-    print(data)
-
-    # 以相同的顺序指定特征名称
-    feature_names = ['open', 'high', 'low', 'rate', 'volume', 'volatility', 'sharp', 'signal']
-
     if isV6:
-        feature_names = ['current','avg','open', 'high', 'low', 'rate', 'volume', 'volatility', 'sharp', 'signal']
-    else
-        if 'current' in data:
-        del data['current']
-    if 'avg' in data:
-        del data['avg']    
+        feature_names = ['current', 'avg', 'open', 'high', 'low', 'rate', 'volume', 'volatility', 'sharp', 'signal']
+    else:
+        feature_names = ['open', 'high', 'low', 'rate', 'volume', 'volatility', 'sharp', 'signal']
+        # 如果不是V6，我们不需要删除'current'和'avg'这两个key value，我们只需要在创建DataFrame时不包含它们
 
     # 创建一个DataFrame，明确指定列的顺序
-    df = pd.DataFrame(data, columns=feature_names, index=[0])
-
-    print(df)
+    df = pd.DataFrame({feature: data[feature] for feature in feature_names}, index=[0])
 
     # 使用模型进行预测
     prediction = model.predict(df)
@@ -114,14 +105,12 @@ def predict(model,le,isV6):
     # 使用 LabelEncoder 将整数编码转换回类别标签
     prediction = le.inverse_transform(prediction)
 
-    print(prediction)
     # 将预测结果转化为列表
     prediction = prediction.tolist()
 
-    print(prediction)
-
     # 返回JSON格式的预测结果
     return jsonify(prediction)
+
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
