@@ -5,18 +5,18 @@ from joblib import load
 app = Flask(__name__)
 
 # 加载模型和 LabelEncoder
-model_3mv6 = load('model_3mv6.joblib')
-model_5mv6 = load('model_5mv6.joblib')
-model_15mv6 = load('model_15mv6.joblib')
-model_30mv6 = load('model_30mv6.joblib')
-model_1hv6 = load('model_1hv6.joblib')
-model_4hv6 = load('model_4hv6.joblib')
-le3mv6 = load('label_encoder_3mv6.joblib')
-le5mv6 = load('label_encoder_5mv6.joblib')
-le15mv6 = load('label_encoder_15mv6.joblib')
-le30mv6 = load('label_encoder_30mv6.joblib')
-le1hv6 = load('label_encoder_1hv6.joblib')
-le4hv6 = load('label_encoder_4hv6.joblib')
+model_3mv7 = load('model_3mv7.joblib')
+model_5mv7 = load('model_5mv7.joblib')
+model_15mv7 = load('model_15mv7.joblib')
+model_30mv7 = load('model_30mv7.joblib')
+model_1hv7 = load('model_1hv7.joblib')
+model_4hv7 = load('model_4hv7.joblib')
+le3mv7 = load('label_encoder_3mv7.joblib')
+le5mv7 = load('label_encoder_5mv7.joblib')
+le15mv7 = load('label_encoder_15mv7.joblib')
+le30mv7 = load('label_encoder_30mv7.joblib')
+le1hv7 = load('label_encoder_1hv7.joblib')
+le4hv7 = load('label_encoder_4hv7.joblib')
 
 model_3mv4 = load('model_3mv4.joblib')
 model_5mv4 = load('model_5mv4.joblib')
@@ -37,27 +37,27 @@ le4hv4 = load('label_encoder_4hv4.joblib')
 
 @app.route('/predict_3m', methods=['POST'])
 def predict_3m():
-    return predict(model_3mv6,le3mv6,True)
+    return predict(model_3mv7,le3mv7,True)
 
 @app.route('/predict_5m', methods=['POST'])
 def predict_5m():
-    return predict(model_5mv6,le5mv6,True)
+    return predict(model_5mv7,le5mv7,True)
 
 @app.route('/predict_15m', methods=['POST'])
 def predict_15m():
-    return predict(model_15mv6,le15mv6,True)
+    return predict(model_15mv7,le15mv7,True)
 
 @app.route('/predict_30m', methods=['POST'])
 def predict_30m():
-    return predict(model_30mv6,le30mv6,True)
+    return predict(model_30mv7,le30mv7,True)
 
 @app.route('/predict_1h', methods=['POST'])
 def predict_1h():
-    return predict(model_1hv6,le1hv6,True)
+    return predict(model_1hv7,le1hv7,True)
 
 @app.route('/predict_4h', methods=['POST'])
 def predict_4h():
-    return predict(model_4hv6,le4hv6,True)
+    return predict(model_4hv7,le4hv7,True)
 
 
 @app.route('/predict_3mv4', methods=['POST'])
@@ -86,15 +86,15 @@ def predict_4hv4():
 
 
 
-def predict(model, le, isV6):
+def predict(model, le, isv7):
     # 获取请求的数据
     data = request.json
 
-    if isV6:
+    if isv7:
         feature_names = ['current', 'avg', 'open', 'high', 'low', 'rate', 'volume', 'volatility', 'sharp', 'signal']
     else:
         feature_names = ['open', 'high', 'low', 'rate', 'volume', 'volatility', 'sharp', 'signal']
-        # 如果不是V6，我们不需要删除'current'和'avg'这两个key value，我们只需要在创建DataFrame时不包含它们
+        # 如果不是v7，我们不需要删除'current'和'avg'这两个key value，我们只需要在创建DataFrame时不包含它们
 
     # 创建一个DataFrame，明确指定列的顺序
     df = pd.DataFrame({feature: data[feature] for feature in feature_names}, index=[0])
@@ -113,4 +113,4 @@ def predict(model, le, isV6):
 
 
 if __name__ == '__main__':
-    app.run(port=5000, debug=True)
+    app.run(port=5001, debug=True)
