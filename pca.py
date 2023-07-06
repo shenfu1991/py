@@ -3,6 +3,7 @@ import xgboost as xgb
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 from imblearn.over_sampling import SMOTE
+from imblearn.under_sampling import RandomUnderSampler
 from joblib import dump
 from datetime import datetime
 from sklearn.decomposition import PCA
@@ -21,12 +22,9 @@ print(path)
 df = pd.read_csv(path)
 
 # 准备数据
-#features = ['open', 'high', 'low', 'rate', 'volume', 'volatility', 'sharp', 'signal']
 features = ['current','avg','open', 'high', 'low', 'rate', 'volume', 'volatility', 'sharp', 'signal']
-#
 X = df[features]
 y = df['result']
-
 
 # 特征标准化
 scaler = StandardScaler()
@@ -44,6 +42,10 @@ dump(le, 'label_encoder_.joblib')  # save the label encoder
 # 过采样处理
 smote = SMOTE(random_state=0)
 X_resampled, y_resampled = smote.fit_resample(X_pca, y)
+
+# 欠采样处理
+rus = RandomUnderSampler(random_state=0)
+X_resampled, y_resampled = rus.fit_resample(X_resampled, y_resampled)
 
 # Split the data
 X_train, X_test, y_train, y_test = train_test_split(X_resampled, y_resampled, test_size=0.2, random_state=42)
