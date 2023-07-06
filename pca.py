@@ -34,6 +34,11 @@ X = scaler.fit_transform(X)
 pca = PCA(n_components=0.95)  # 保留95%的方差
 X_pca = pca.fit_transform(X)
 
+# 计算特征和目标变量之间的相关性
+correlation = pd.DataFrame(X_pca).apply(lambda x: x.corr(y))
+features = [i for i, value in enumerate(correlation) if abs(value) > 0.1]  # 这里阈值设置为0.1，可以根据需要调整
+X_pca = pd.DataFrame(X_pca)[features]
+
 # Label encoding
 le = LabelEncoder()
 y = le.fit_transform(y)
