@@ -19,11 +19,53 @@ class PreprocessingPipeline:
 
 
 # 加载模型和预处理流水线
-model = load('model_.joblib')
-preprocessing = load('preprocessing.joblib')
+model_3mv9 = load('model_3mv9.joblib')
+preprocessing_3mv9 = load('preprocessing_3mv9.joblib')
 
-@app.route('/predict', methods=['POST'])
-def predict():
+model_30mv9 = load('model_30mv9.joblib')
+preprocessing_30mv9 = load('preprocessing_30mv9.joblib')
+
+model_5mv9 = load('model_5mv9.joblib')
+preprocessing_5mv9 = load('preprocessing_5mv9.joblib')
+
+model_15mv9 = load('model_15mv9.joblib')
+preprocessing_15mv9 = load('preprocessing_15mv9.joblib')
+
+model_1hv9 = load('model_1hv9.joblib')
+preprocessing_1hv9 = load('preprocessing_1hv9.joblib')
+
+model_4hv9 = load('model_4hv9.joblib')
+preprocessing_4hv9 = load('preprocessing_4hv9.joblib')
+
+@app.route('/predict_3m', methods=['POST'])
+def predict_3m():
+    return predict(model_3mv9,preprocessing_3mv9)
+
+@app.route('/predict_30m', methods=['POST'])
+def predict_30m():
+    return predict(model_30mv9,preprocessing_30mv9)
+
+@app.route('/predict_5m', methods=['POST'])
+def predict_5m():
+    return predict(model_5mv9,preprocessing_5mv9)
+
+@app.route('/predict_15m', methods=['POST'])
+def predict_15m():
+    return predict(model_15mv9,preprocessing_15mv9)
+
+@app.route('/predict_1h', methods=['POST'])
+def predict_1h():
+    return predict(model_1hv9,preprocessing_1hv9)
+
+@app.route('/predict_4h', methods=['POST'])
+def predict_4h():
+    return predict(model_4hv9,preprocessing_4hv9)
+
+
+
+
+
+def predict(model,preprocessing):
     # 获取请求的数据
     data = request.json
 
@@ -54,4 +96,4 @@ def predict():
     return jsonify(prediction)
 
 if __name__ == '__main__':
-    app.run(port=5001, debug=True)
+    app.run(port=5002, debug=True)
