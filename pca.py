@@ -9,6 +9,8 @@ from datetime import datetime
 from sklearn.decomposition import PCA
 from sklearn.feature_selection import RFE
 from sklearn.linear_model import LogisticRegression
+from sklearn.preprocessing import LabelEncoder
+
 
 class PreprocessingPipeline:
     def __init__(self, scaler, rfe, pca, le):
@@ -23,7 +25,7 @@ start_time = datetime.now()
 # 打印当前时间
 print("当前时间:", start_time)
 
-path = '/Users/xuanyuan/py/merged_4hv7.csv'
+path = '/Users/xuanyuan/py/merged.csv'
 
 print(path)
 
