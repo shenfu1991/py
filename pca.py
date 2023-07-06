@@ -16,7 +16,7 @@ start_time = datetime.now()
 # 打印当前时间
 print("当前时间:", start_time)
 
-path = '/Users/xuanyuan/py/merged_15mv7.csv'
+path = '/Users/xuanyuan/py/merged_4hv7.csv'
 
 print(path)
 
@@ -40,7 +40,7 @@ X = scaler.fit_transform(X)
 
 # 递归特征消除
 model = LogisticRegression(max_iter=1000)
-rfe = RFE(estimator=model, n_features_to_select=5)  # 这里我们选择5个最优特征，可以根据需要调整
+rfe = RFE(estimator=model, n_features_to_select=10)  # 这里我们选择5个最优特征，可以根据需要调整
 fit = rfe.fit(X, y)
 X = fit.transform(X)
 
