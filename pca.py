@@ -33,10 +33,17 @@ scaler = StandardScaler()
 X = scaler.fit_transform(X)
 
 # 递归特征消除
-model = LogisticRegression()
+# model = LogisticRegression()
+# rfe = RFE(estimator=model, n_features_to_select=5)  # 这里我们选择5个最优特征，可以根据需要调整
+# fit = rfe.fit(X, y)
+# X = fit.transform(X)
+
+# 递归特征消除
+model = LogisticRegression(max_iter=1000)
 rfe = RFE(estimator=model, n_features_to_select=5)  # 这里我们选择5个最优特征，可以根据需要调整
 fit = rfe.fit(X, y)
 X = fit.transform(X)
+
 
 
 # 运用PCA
