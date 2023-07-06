@@ -1,7 +1,7 @@
 import pandas as pd
 import xgboost as xgb
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import LabelEncoder, StandardScaler
+from sklearn.preprocessing import StandardScaler
 from imblearn.over_sampling import SMOTE
 from imblearn.under_sampling import RandomUnderSampler
 from joblib import dump
@@ -9,6 +9,13 @@ from datetime import datetime
 from sklearn.decomposition import PCA
 from sklearn.feature_selection import RFE
 from sklearn.linear_model import LogisticRegression
+
+class PreprocessingPipeline:
+    def __init__(self, scaler, rfe, pca, le):
+        self.scaler = scaler
+        self.rfe = rfe
+        self.pca = pca
+        self.le = le
 
 # 获取当前时间
 start_time = datetime.now()
@@ -33,18 +40,10 @@ scaler = StandardScaler()
 X = scaler.fit_transform(X)
 
 # 递归特征消除
-# model = LogisticRegression()
-# rfe = RFE(estimator=model, n_features_to_select=5)  # 这里我们选择5个最优特征，可以根据需要调整
-# fit = rfe.fit(X, y)
-# X = fit.transform(X)
-
-# 递归特征消除
 model = LogisticRegression(max_iter=1000)
 rfe = RFE(estimator=model, n_features_to_select=10)  # 这里我们选择5个最优特征，可以根据需要调整
 fit = rfe.fit(X, y)
 X = fit.transform(X)
-
-
 
 # 运用PCA
 pca = PCA(n_components=0.95)  # 保留95%的方差
@@ -53,7 +52,10 @@ X_pca = pca.fit_transform(X)
 # Label encoding
 le = LabelEncoder()
 y = le.fit_transform(y)
-dump(le, 'label_encoder_.joblib')  # save the label encoder
+
+# 保存预处理流水线
+preprocessing = PreprocessingPipeline(scaler, rfe, pca, le)
+dump(preprocessing, 'preprocessing.joblib')
 
 # 过采样处理
 smote = SMOTE(random_state=0)
