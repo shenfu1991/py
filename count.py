@@ -14,7 +14,8 @@ def count_values(csv_file):
 
     return value_counts
 
-csv_file = 'path_to_your_file.csv'  # 替换为你的CSV文件路径
+csv_file = 'resampled.csv'  # 替换为你的CSV文件路径
+print(csv_file)
 result_counts = count_values(csv_file)
 
 for result, count in result_counts.items():

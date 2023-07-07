@@ -12,7 +12,7 @@ start_time = datetime.now()
 # 打印当前时间
 print("当前时间:", start_time)
 
-path = '/Users/xuanyuan/py/merged_15mv7.csv'
+path = '/Users/xuanyuan/py/resampled.csv'
 
 print(path)
 
@@ -59,3 +59,32 @@ end_time = datetime.now()
 # 计算并打印执行时间
 execution_time = end_time - start_time
 print("脚本执行耗时: ",execution_time, "秒")
+
+
+# # 加载必要的库
+# from joblib import load
+# from sklearn.metrics import classification_report
+# import pandas as pd
+
+
+# # 读取你的新csv文件
+# new_data_path = 'merged.csv'  # 替换为你的新csv文件路径
+# new_df = pd.read_csv(new_data_path)
+
+# # 准备数据
+# new_X = new_df[features]
+# new_y = new_df['result']
+
+# # 对数据进行相同的预处理
+# new_X = scaler.transform(new_X)  # 注意这里使用transform, 不是fit_transform
+# new_y = le.transform(new_y)  # 用之前保存的label encoder转化
+
+# # 加载模型
+# best_model = load('model_4hv9.joblib.joblib')
+
+# # 预测
+# new_y_pred = best_model.predict(new_X)
+
+# # 输出分类报告，这个报告包含了各个标签的精确度、召回率等信息
+# print(classification_report(new_y, new_y_pred, target_names=le.classes_))
+
