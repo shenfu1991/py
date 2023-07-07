@@ -13,8 +13,8 @@ new_X = new_df[features]
 new_y = new_df['result']
 
 # 加载模型和标签编码器
-best_model = load('model_15m_minv2.joblib')
-le = load('label_encoder_15m_minv2.joblib')
+best_model = load('model_15ma2.joblib')
+le = load('label_encoder_15ma2.joblib')
 
 #v7 对数据进行标准化
 scaler = StandardScaler()
