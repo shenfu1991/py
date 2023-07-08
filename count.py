@@ -14,7 +14,7 @@ def count_values(csv_file):
 
     return value_counts
 
-csv_file = 'processed_merged_15mv7.csv'  # 替换为你的CSV文件路径
+csv_file = 'merged_1ha1.csv'  # 替换为你的CSV文件路径
 print(csv_file)
 result_counts = count_values(csv_file)
 

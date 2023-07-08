@@ -14,7 +14,7 @@ start_time = datetime.now()
 # 打印当前时间
 print("当前时间:", start_time)
 
-path = 'processed_merged_15mv7.csv'
+path = 'processed_merged_1ha1.csv'
 
 print(path)
 
@@ -72,6 +72,9 @@ y_pred_test = best_model.predict(X_test)
 print('Training accuracy: ', accuracy_score(y_train, y_pred_train))
 print('Testing accuracy: ', accuracy_score(y_test, y_pred_test))
 
+# 保存模型
+dump(best_model, 'model_.joblib')
+
 # Print Classification Report
 print(classification_report(y_test, y_pred_test, target_names=le.classes_))
 
@@ -83,8 +86,6 @@ print("Confusion Matrix: \n", cm)
 xgb.plot_importance(best_model)
 plt.show()
 
-# 保存模型
-dump(best_model, 'model_.joblib')
 
 # 获取当前时间
 end_time = datetime.now()
