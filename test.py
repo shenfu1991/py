@@ -4,7 +4,7 @@ from sklearn.metrics import classification_report
 from sklearn.preprocessing import StandardScaler
 
 # 读取新的csv文件
-new_data_path = 'processed_n_test_15m.csv'  # 替换为你的新csv文件路径
+new_data_path = 'merged_15mv7.csv'  # 替换为你的新csv文件路径
 new_df = pd.read_csv(new_data_path)
 
 # 准备数据

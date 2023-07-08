@@ -1,9 +1,9 @@
 import pandas as pd
+import numpy as np
 import xgboost as xgb
-from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.model_selection import train_test_split, RandomizedSearchCV
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
-from sklearn.utils import class_weight
 from joblib import dump
 import matplotlib.pyplot as plt
 from datetime import datetime
@@ -26,6 +26,11 @@ features = ['current','avg','open', 'high', 'low', 'rate', 'volume', 'volatility
 X = df[features]
 y = df['result']
 
+# Assign higher weights to 'long' and 'short' classes
+weights = np.ones(len(y))
+weights[(y == 'long') | (y == 'short')] = 10
+weights[(y == 'LN') | (y == 'SN')] = 1
+
 # Label encoding
 le = LabelEncoder()
 y = le.fit_transform(y)
@@ -36,25 +41,29 @@ sc = StandardScaler()
 X = sc.fit_transform(X)
 
 # Split the data
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test, weights_train, weights_test = train_test_split(X, y, weights, test_size=0.2, random_state=42)
 
-# Define model parameters for grid search
-param_grid = {
+# Define model parameters for random search
+param_distributions = {
+    'objective': ['multi:softmax'],
+    'num_class': [4],
     'n_estimators': [50, 100, 150],
     'max_depth': [5, 10, 15],
     'learning_rate': [0.01, 0.1],
     'subsample': [0.5, 1]
 }
 
-# Initialize XGBoost Classifier
-xgb_clf = xgb.XGBClassifier()
-
-# Perform Grid Search
-grid_search = GridSearchCV(estimator=xgb_clf, param_grid=param_grid, cv=3, scoring='accuracy')
-grid_search.fit(X_train, y_train)
+# Perform Random Search
+random_search = RandomizedSearchCV(estimator=xgb.XGBClassifier(eval_metric='mlogloss'), 
+                                   param_distributions=param_distributions, 
+                                   n_iter=20, 
+                                   cv=3, 
+                                   scoring='accuracy', 
+                                   random_state=42)
+random_search.fit(X_train, y_train, sample_weight=weights_train)
 
 # Extract Best Model
-best_model = grid_search.best_estimator_
+best_model = random_search.best_estimator_
 
 # Output Training and Testing accuracy
 y_pred_train = best_model.predict(X_train)
