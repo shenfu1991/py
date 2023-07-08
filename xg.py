@@ -3,6 +3,8 @@ import xgboost as xgb
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 from joblib import dump
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+
 
 from datetime import datetime
 
@@ -13,15 +15,13 @@ start_time = datetime.now()
 print("当前时间:", start_time)
 
 
-path = 'processed_merged_15ma1.csv'
+path = 'new_merged_15ma1.csv'
 
 print(path)
 
 # 读取数据
 df = pd.read_csv(path)
 
-# 准备数据
-# features = ['open', 'high', 'low', 'rate', 'volume', 'volatility', 'sharp', 'signal']
 features = ['current','avg','open', 'high', 'low', 'rate', 'volume', 'volatility', 'sharp', 'signal']
 
 X = df[features]
@@ -36,8 +36,7 @@ dump(le, 'label_encoder_.joblib') # save the label encoder
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # 使用最优参数训练模型
-best_model = xgb.XGBClassifier(n_estimators=100, max_depth=15, learning_rate=0.1, subsample=0.5)
-# best_model = xgb.XGBClassifier(n_estimators=100,max_depth=10,subsample=1)
+best_model = xgb.XGBClassifier(n_estimators=100,max_depth=10)
 best_model.fit(X_train, y_train)
 
 # 输出训练准确率
@@ -46,6 +45,14 @@ print("Testing accuracy: ", best_model.score(X_test, y_test))
 
 # 保存模型
 dump(best_model, 'model_.joblib')
+
+# Output Training and Testing accuracy
+y_pred_train = best_model.predict(X_train)
+y_pred_test = best_model.predict(X_test)
+
+
+# Print Classification Report
+print(classification_report(y_test, y_pred_test, target_names=le.classes_))
 
 
 # 获取当前时间

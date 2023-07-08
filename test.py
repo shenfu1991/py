@@ -1,30 +1,50 @@
 import pandas as pd
+import xgboost as xgb
+from sklearn.preprocessing import LabelEncoder
 from joblib import load
-from sklearn.metrics import classification_report
-from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 
-# 读取新的csv文件
-new_data_path = 'merged_15mv7.csv'  # 替换为你的新csv文件路径
-new_df = pd.read_csv(new_data_path)
 
-# 准备数据
+from datetime import datetime
+
+# 获取当前时间
+start_time = datetime.now()
+
+# 打印当前时间
+print("当前时间:", start_time)
+
+
+test_path = '/Users/xuanyuan/Documents/new_GRTUSDT_15m_.csv'  # 提供测试数据的路径
+
+print(test_path)
+
+# 读取测试数据
+df_test = pd.read_csv(test_path)
+
 features = ['current','avg','open', 'high', 'low', 'rate', 'volume', 'volatility', 'sharp', 'signal']
-new_X = new_df[features]
-new_y = new_df['result']
 
-# 加载模型和标签编码器
-best_model = load('model_15ma2.joblib')
-le = load('label_encoder_15ma2.joblib')
+X_test = df_test[features]
+y_test = df_test['result']
 
-#v7 对数据进行标准化
-scaler = StandardScaler()
-new_X = scaler.fit_transform(new_X)
+# 加载之前保存的标签编码器
+le = load('label_encoder_15v33.joblib') 
+y_test = le.transform(y_test)  # 对标签进行编码
 
-# 使用之前的标签编码器转化标签
-new_y = le.transform(new_y)
+# 加载训练好的模型
+best_model = load('model_15v33.joblib')
 
-# 预测
-new_y_pred = best_model.predict(new_X)
+# 输出测试准确率
+print("Testing accuracy: ", best_model.score(X_test, y_test))
 
-# 输出分类报告
-print(classification_report(new_y, new_y_pred, target_names=le.classes_))
+# Output Testing accuracy
+y_pred_test = best_model.predict(X_test)
+
+# Print Classification Report
+print(classification_report(y_test, y_pred_test, target_names=le.classes_))
+
+# 获取当前时间
+end_time = datetime.now()
+
+# 计算并打印执行时间
+execution_time = end_time - start_time
+print("脚本执行耗时: ",execution_time, "秒")
