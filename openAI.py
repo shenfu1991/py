@@ -73,3 +73,6 @@ print("Best parameters:", best_params)
 print("Training accuracy:", train_acc)
 print("Test accuracy:", test_acc)
 print("Classification report:\n", report)
+
+# 保存模型
+dump(xgb_best, 'model_.joblib')
