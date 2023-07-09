@@ -4,6 +4,7 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, classification_report
 from xgboost import XGBClassifier
+from joblib import dump
 
 # Load the data
 data = pd.read_csv('RDNTUSDT_15m_15m.csv')
@@ -36,10 +37,16 @@ X_train_top_features = X_train[top_features]
 X_test_top_features = X_test[top_features]
 
 # Define the parameter grid
+# param_grid = {
+#     'max_depth': [3, 5, 7],
+#     'n_estimators': [50, 100, 150],
+#     'learning_rate': [0.01, 0.1, 0.2]
+# }
+
 param_grid = {
-    'max_depth': [3, 5, 7],
-    'n_estimators': [50, 100, 150],
-    'learning_rate': [0.01, 0.1, 0.2]
+    'max_depth': [3],
+    'n_estimators': [50],
+    'learning_rate': [0.01]
 }
 
 # Initialize the XGBClassifier
