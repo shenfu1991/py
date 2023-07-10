@@ -11,6 +11,8 @@ data_new = pd.read_csv('RDNTUSDT_15m_15m_t.csv')  # replace 'new_data.csv' with 
 
 # Select the top 3 features
 top_features = ["current", "signal", "avg"]  # replace this with your top features
+#top_features = ['current','avg','open', 'high', 'low', 'rate', 'volume', 'volatility', 'sharp', 'signal']
+
 X_new_top_features = data_new[top_features]
 
 # Make predictions
@@ -23,10 +25,10 @@ y_true = le.transform(data_new['result'])
 y_pred_decoded = le.inverse_transform(y_pred)
 
 # Print the classification report
-print(classification_report(y_true, y_pred))
+print(classification_report(le.inverse_transform(y_true), le.inverse_transform(y_pred)))
 
 # Print the confusion matrix
-print(confusion_matrix(y_true, y_pred))
+print(confusion_matrix(le.inverse_transform(y_true), le.inverse_transform(y_pred)))
 
 # Save the predictions to a CSV file
 pd.DataFrame(y_pred_decoded, columns=['Predictions']).to_csv('predictions.csv', index=False)

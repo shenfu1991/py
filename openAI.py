@@ -22,6 +22,8 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 
 # Select the top 3 features
 top_features = ["current", "signal", "avg"] # replace this with your top features
+#top_features = ['current','avg','open', 'high', 'low', 'rate', 'volume', 'volatility', 'sharp', 'signal']
+
 X_train_top_features = X_train[top_features]
 
 # Define the parameter grid
@@ -32,7 +34,7 @@ param_grid = {
 }
 
 # Initialize the XGBClassifier
-xgb = XGBClassifier(use_label_encoder=False, eval_metric='mlogloss', random_state=42)
+xgb = XGBClassifier(eval_metric='mlogloss', random_state=42)
 
 # Initialize the GridSearchCV
 grid_search = GridSearchCV(xgb, param_grid, cv=3, verbose=2)
@@ -44,7 +46,7 @@ grid_search.fit(X_train_top_features, y_train)
 best_params = grid_search.best_params_
 
 # Train the XGBClassifier with the best parameters
-xgb_best = XGBClassifier(**best_params, use_label_encoder=False, eval_metric='mlogloss', random_state=42)
+xgb_best = XGBClassifier(**best_params, eval_metric='mlogloss', random_state=42)
 xgb_best.fit(X_train_top_features, y_train)
 
 # Save the model
@@ -52,3 +54,12 @@ dump(xgb_best, 'model_.joblib')
 
 # Save the label encoder
 dump(le, 'label_encoder.joblib')
+
+
+from sklearn.metrics import classification_report
+
+# Predict on the test set
+y_pred = xgb_best.predict(X_test[top_features])
+
+# Print the classification report
+print(classification_report(le.inverse_transform(y_test), le.inverse_transform(y_pred)))
