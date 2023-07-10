@@ -5,7 +5,7 @@ from xgboost import XGBClassifier
 from joblib import dump
 
 # Load the data
-data = pd.read_csv('RDNTUSDT_15m_15m.csv')
+data = pd.read_csv('merged_15n.csv')
 
 # Initialize a label encoder
 le = LabelEncoder()
