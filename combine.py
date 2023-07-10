@@ -2,7 +2,7 @@ import pandas as pd
 import glob
 
 # 设置csv文件的路径
-path = r'/Users/xuanyuan/py/15n' # 15m
+path = r'/Users/xuanyuan/Documents/b' # 15m
 
 print(path)
 
@@ -21,4 +21,4 @@ for filename in all_files:
 frame = pd.concat(li, axis=0, ignore_index=True)
 
 # 如果需要，可以将合并后的数据保存为新的CSV文件
-frame.to_csv("merged.csv", index=False)
+frame.to_csv("merged_.csv", index=False)

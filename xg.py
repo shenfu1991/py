@@ -15,7 +15,7 @@ start_time = datetime.now()
 print("当前时间:", start_time)
 
 
-path = 'merged_15n.csv'
+path = 'merged_all.csv'
 
 print(path)
 
@@ -54,10 +54,3 @@ y_pred_test = best_model.predict(X_test)
 # Print Classification Report
 print(classification_report(y_test, y_pred_test, target_names=le.classes_))
 
-
-# 获取当前时间
-end_time = datetime.now()
-
-# 计算并打印执行时间
-execution_time = end_time - start_time
-print("脚本执行耗时: ",execution_time, "秒")
