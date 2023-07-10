@@ -7,11 +7,11 @@ xgb_best = load('model_.joblib')
 le = load('label_encoder.joblib')
 
 # Load the new data
-data_new = pd.read_csv('merged_15n.csv')  # replace 'new_data.csv' with your new csv file
+data_new = pd.read_csv('RDNTUSDT_15m_15m_t.csv')  # replace 'new_data.csv' with your new csv file
 
 # Select the top 3 features
-top_features = ["current", "signal", "avg"]  # replace this with your top features
-#top_features = ['current','avg','open', 'high', 'low', 'rate', 'volume', 'volatility', 'sharp', 'signal']
+#top_features = ["current", "signal", "avg"]  # replace this with your top features
+top_features = ['current','avg','open', 'high', 'low', 'rate', 'volume', 'volatility', 'sharp', 'signal']
 
 X_new_top_features = data_new[top_features]
 
