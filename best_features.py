@@ -4,7 +4,7 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.ensemble import RandomForestClassifier
 
 # Load the data
-data = pd.read_csv('RDNTUSDT_15m_15m.csv')  # replace with the path to your data
+data = pd.read_csv('cleaned_merged_15n.csv')  # replace with the path to your data
 
 # Initialize a label encoder
 le = LabelEncoder()
@@ -41,3 +41,16 @@ print(feature_importances)
 top_features = feature_importances["feature"][:3]
 
 print("Top 3 features:", top_features)
+
+
+#       feature  importance
+# 0     current    0.161568
+# 1         avg    0.136167
+# 9      signal    0.129838
+# 7  volatility    0.122049
+# 8       sharp    0.091632
+# 3        high    0.075952
+# 4         low    0.075866
+# 2        open    0.074625
+# 6      volume    0.066773
+# 5        rate    0.065531

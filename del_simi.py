@@ -2,7 +2,7 @@ import pandas as pd
 import os
 
 # The directory where the CSV files are stored
-directory = '/Users/xuanyuan/Downloads/e'
+directory = '/Users/xuanyuan/Documents/n'
 
 # Loop over all files in the directory
 for filename in os.listdir(directory):
@@ -27,7 +27,7 @@ for filename in os.listdir(directory):
         num_same_values = (data_without_result == data_shifted).sum(axis=1)
 
         # Find the rows where 4 or more columns have the same value in the original and shifted DataFrames
-        rows_to_remove = num_same_values >= 7
+        rows_to_remove = num_same_values >= 4
 
         # Remove these rows from the cleaned DataFrame
         data_cleaned = data_cleaned[~rows_to_remove]

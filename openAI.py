@@ -5,7 +5,7 @@ from xgboost import XGBClassifier
 from joblib import dump
 
 # Load the data
-data = pd.read_csv('merged_15n.csv')
+data = pd.read_csv('cleaned_merged_15n.csv')
 
 # Initialize a label encoder
 le = LabelEncoder()
@@ -28,9 +28,9 @@ X_train_top_features = X_train[top_features]
 
 # Define the parameter grid
 param_grid = {
-    'max_depth': [7],
-    'n_estimators': [150],
-    'learning_rate': [0.2]
+    'max_depth': [3,7,10,15],
+    'n_estimators': [10,100,150,200],
+    'learning_rate': [0.001,0.01,0.1,0.2]
 }
 
 # Initialize the XGBClassifier
