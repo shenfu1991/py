@@ -26,9 +26,9 @@ X_train_top_features = X_train[top_features]
 
 # Define the parameter grid
 param_grid = {
-    'max_depth': [3],
-    'n_estimators': [50],
-    'learning_rate': [0.01]
+    'max_depth': [7],
+    'n_estimators': [150],
+    'learning_rate': [0.2]
 }
 
 # Initialize the XGBClassifier

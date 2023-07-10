@@ -1,25 +1,32 @@
 import pandas as pd
-from sklearn.preprocessing import LabelEncoder
-from xgboost import XGBClassifier
+from sklearn.metrics import classification_report, confusion_matrix
 from joblib import load
 
-# Load the model
+# Load the model and the label encoder
 xgb_best = load('model_.joblib')
-
-# Load the label encoder
 le = load('label_encoder.joblib')
 
 # Load the new data
-data = pd.read_csv('RDNTUSDT_15m_15m_t.csv') # replace this with your new csv file
+data_new = pd.read_csv('RDNTUSDT_15m_15m_t.csv')  # replace 'new_data.csv' with your new csv file
 
 # Select the top 3 features
-top_features = ["current", "signal", "avg"] # replace this with your top features
-X_new = data[top_features]
+top_features = ["current", "signal", "avg"]  # replace this with your top features
+X_new_top_features = data_new[top_features]
 
-# Make predictions on the new data
-new_preds = xgb_best.predict(X_new)
+# Make predictions
+y_pred = xgb_best.predict(X_new_top_features)
+
+# If 'result' is the column with the actual labels in the new csv file
+y_true = le.transform(data_new['result'])
 
 # Decode the predictions
-new_preds_decoded = le.inverse_transform(new_preds)
+y_pred_decoded = le.inverse_transform(y_pred)
 
-print("Predictions:", new_preds_decoded)
+# Print the classification report
+print(classification_report(y_true, y_pred))
+
+# Print the confusion matrix
+print(confusion_matrix(y_true, y_pred))
+
+# Save the predictions to a CSV file
+pd.DataFrame(y_pred_decoded, columns=['Predictions']).to_csv('predictions.csv', index=False)
