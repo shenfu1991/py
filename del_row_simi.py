@@ -2,7 +2,7 @@ import pandas as pd
 import os
 
 # 获取文件夹内所有csv文件的路径
-folder_path = '/Users/xuanyuan/Documents/n'  # 替换成你的文件夹路径
+folder_path = '/Users/xuanyuan/Documents/csv'  # 替换成你的文件夹路径
 csv_files = [f for f in os.listdir(folder_path) if f.endswith('.csv')]
 
 # 定义一个函数用于删除两行完全相同的行
