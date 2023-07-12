@@ -2,7 +2,7 @@ import pandas as pd
 import glob
 
 # 设置csv文件的路径
-path = r'/Users/xuanyuan/py/mdx' # 15m
+path = r'/Users/xuanyuan/py/15t' # 15m
 
 print(path)
 
