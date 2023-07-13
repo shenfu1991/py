@@ -5,44 +5,44 @@ from joblib import load
 app = Flask(__name__)
 
 # 加载模型和 LabelEncoder
-model_3d = load('model_3d.joblib')
-model_5d = load('model_5d.joblib')
-model_15d = load('model_15d.joblib')
-model_30d = load('model_30d.joblib')
-model_1d = load('model_1d.joblib')
-model_4d = load('model_4d.joblib')
-le3d = load('label_encoder_3d.joblib')
-le5d = load('label_encoder_5d.joblib')
-le15d = load('label_encoder_15d.joblib')
-le30d = load('label_encoder_30d.joblib')
-le1d = load('label_encoder_1d.joblib')
-le4d = load('label_encoder_4d.joblib')
+model_3b = load('model_3b.joblib')
+model_5b = load('model_5b.joblib')
+model_15b = load('model_15b.joblib')
+model_30b = load('model_30b.joblib')
+model_1b = load('model_1b.joblib')
+model_4b = load('model_4b.joblib')
+le3b = load('label_encoder_3b.joblib')
+le5b = load('label_encoder_5b.joblib')
+le15b = load('label_encoder_15b.joblib')
+le30b = load('label_encoder_30b.joblib')
+le1b = load('label_encoder_1b.joblib')
+le4b = load('label_encoder_4b.joblib')
 
 
 
 @app.route('/predict_3m', methods=['POST'])
 def predict_3m():
-    return predict(model_3d,le3d)
+    return predict(model_3b,le3b)
 
 @app.route('/predict_5m', methods=['POST'])
 def predict_5m():
-    return predict(model_5d,le5d)
+    return predict(model_5b,le5b)
 
 @app.route('/predict_15m', methods=['POST'])
 def predict_15m():
-    return predict(model_15d,le15d)
+    return predict(model_15b,le15b)
 
 @app.route('/predict_30m', methods=['POST'])
 def predict_30m():
-    return predict(model_30d,le30d)
+    return predict(model_30b,le30b)
 
 @app.route('/predict_1h', methods=['POST'])
 def predict_1h():
-    return predict(model_1d,le1d)
+    return predict(model_1b,le1b)
 
 @app.route('/predict_4h', methods=['POST'])
 def predict_4h():
-    return predict(model_4d,le4d)
+    return predict(model_4b,le4b)
 
 
 
