@@ -2,7 +2,7 @@ import pandas as pd
 import os
 
 # The directory where the CSV files are stored
-directory = '/Users/xuanyuan/Documents/n'
+directory = '/Users/xuanyuan/Documents/csv-7-12'
 
 # Loop over all files in the directory
 for filename in os.listdir(directory):
