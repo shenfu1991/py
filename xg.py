@@ -15,14 +15,15 @@ start_time = datetime.now()
 print("当前时间:", start_time)
 
 
-path = 'merged_15b.csv'
+path = 'merged_p.csv'
 
 print(path)
 
 # 读取数据
 df = pd.read_csv(path)
 
-features = ['current','avg','open', 'high', 'low', 'rate', 'volume', 'volatility', 'sharp', 'signal']
+# features = ['current','avg','open', 'high', 'low', 'rate', 'volume', 'volatility', 'sharp', 'signal']
+features = ['iRank','minRate','maxRate' ,'volatility', 'sharp', 'signal']
 
 X = df[features]
 y = df['result']
