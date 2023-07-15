@@ -3,25 +3,23 @@ import os
 
 # 获取文件夹内所有csv文件的路径
 folder_path = '/Users/xuanyuan/Documents/csv'  # 替换成你的文件夹路径
-csv_files = [f for f in os.listdir(folder_path) if f.endswith('.csv')]
 
-# 定义一个函数用于删除两行完全相同的行
-def drop_identical_rows(df):
-    # 在这里，我们将这四列作为子集，检查它们是否在连续的行中完全相同
-    subset = ['volume', 'volatility', 'sharp', 'signal']
-    df.drop_duplicates(subset=subset, keep=False, inplace=True)
-    return df
+# 遍历文件夹中的每一个文件
+for filename in os.listdir(folder_path):
+    if filename.endswith(".csv"):  # 确保只处理CSV文件
+        file_path = os.path.join(folder_path, filename)
+        # 读取CSV文件到DataFrame
+        df = pd.read_csv(file_path)
 
-# 对每个csv文件进行处理
-for file in csv_files:
-    file_path = os.path.join(folder_path, file)
-    df = pd.read_csv(file_path)
+        # 通过将相邻两行的"volatility", "sharp", "signal"列的值进行比较来判断是否相等
+        # 如果这些列的值相等，则标记为True，否则为False
+        duplicate_mask = (df['volatility'].eq(df['volatility'].shift()) &
+                          df['sharp'].eq(df['sharp'].shift()) &
+                          df['signal'].eq(df['signal'].shift()))
+        
+        # 将标记为True的行（也就是重复的行）从DataFrame中删除
+        df = df.loc[~duplicate_mask]
 
-    # 删除完全相同的行
-    df = drop_identical_rows(df)
-
-    # 将结果保存为新的csv文件
-    new_file_path = os.path.join(folder_path, 'new_'+file)
-    df.to_csv(new_file_path, index=False)
-
-print('处理完成！')
+        # 将处理过的DataFrame保存到新的CSV文件中
+        new_file_path = os.path.join(folder_path, "processed_" + filename)
+        df.to_csv(new_file_path, index=False)
