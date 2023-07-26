@@ -15,14 +15,18 @@ start_time = datetime.now()
 print("当前时间:", start_time)
 
 
-path = 'merged_15b.csv'
+name = "4e"
+
+
+path = 'merged_' + name + '.csv'
 
 print(path)
 
 # 读取数据
 df = pd.read_csv(path)
 
-features = ['current','avg','open', 'high', 'low', 'rate', 'volume', 'volatility', 'sharp', 'signal']
+# features = ['current','avg','open', 'high', 'low', 'rate', 'volume', 'volatility', 'sharp', 'signal']
+features = ['iRank','minRate','maxRate' ,'volatility', 'sharp', 'signal']
 
 X = df[features]
 y = df['result']
@@ -30,7 +34,10 @@ y = df['result']
 # Label encoding
 le = LabelEncoder()
 y = le.fit_transform(y)
-dump(le, 'label_encoder_.joblib') # save the label encoder
+
+leName = 'label_encoder_' + name + '.joblib'
+
+dump(le, leName) # save the label encoder
 
 # Split the data
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
@@ -43,8 +50,9 @@ best_model.fit(X_train, y_train)
 print('Training accuracy: ', best_model.score(X_train, y_train))
 print("Testing accuracy: ", best_model.score(X_test, y_test))
 
+modelName = 'model_' + name + '.joblib'
 # 保存模型
-dump(best_model, 'model_.joblib')
+dump(best_model, modelName)
 
 # Output Training and Testing accuracy
 y_pred_train = best_model.predict(X_train)

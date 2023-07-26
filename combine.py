@@ -1,8 +1,11 @@
 import pandas as pd
 import glob
 
+
+interval = '4e'
+
 # 设置csv文件的路径
-path = r'/Users/xuanyuan/Documents/30b' # 15m
+path = r'/Users/xuanyuan/Documents/' + interval # 15m
 
 print(path)
 
@@ -20,5 +23,8 @@ for filename in all_files:
 # 使用pandas.concat函数将所有的dataframe合并到一个dataframe中
 frame = pd.concat(li, axis=0, ignore_index=True)
 
+
+savePath =  "merged_" + interval + ".csv"
+
 # 如果需要，可以将合并后的数据保存为新的CSV文件
-frame.to_csv("merged_.csv", index=False)
+frame.to_csv(savePath, index=False)
