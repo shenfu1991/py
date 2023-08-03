@@ -19,7 +19,7 @@ scaler = MinMaxScaler(feature_range=(0, 1))
 scaled_data = scaler.fit_transform(resampled_data['current'].values.reshape(-1, 1))
 
 # 定义窗口大小
-window_size = 5
+window_size = 150
 
 # 构建LSTM所需的数据结构
 X, y = [], []
@@ -51,7 +51,7 @@ model.fit(X_train, y_train, epochs=100, batch_size=32)  # 更多的训练周期�
 
 
 # 训练模型
-model.fit(X_train, y_train, epochs=50, batch_size=64)
+#model.fit(X_train, y_train, epochs=50, batch_size=64)
 
 # 在测试集上进行预测
 predictions = model.predict(X_test)
