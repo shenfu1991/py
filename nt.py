@@ -1,5 +1,5 @@
 import pandas as pd
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.preprocessing import StandardScaler
 from imblearn.over_sampling import SMOTE
 from sklearn.ensemble import RandomForestClassifier
@@ -15,15 +15,8 @@ start_time = datetime.now()
 print("当前时间:", start_time)
 
 interval = "15m"
-
 name = "_"+interval+"_"+interval
-
-# path = '/Users/xuanyuan/Documents/ty/RDNTUSDT' + name + '.csv'
-
 path = 'merged_csv_e.csv'
-
-# path = 'merged_' + name + '.csv'
-
 print(path)
 
 data = pd.read_csv(path)
@@ -37,18 +30,20 @@ scaler = StandardScaler()
 X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled = scaler.transform(X_test)
 
-model = RandomForestClassifier(n_estimators=100, random_state=42)
+model = RandomForestClassifier(n_estimators=100, min_samples_leaf=4, min_samples_split=10, random_state=42)
 model.fit(X_train_scaled, y_train)
+
+# Evaluate using cross-validation
+scores = cross_val_score(model, X_train_scaled, y_train, cv=5)
+print(f"Cross-validation scores: {scores}")
+print(f"Average CV Score: {scores.mean()}")
 
 predictions = model.predict(X_test_scaled)
 print(classification_report(y_test, predictions))
 
 modelName = 'model_' + name + '.pkl'
-
 with open(modelName, 'wb') as file:
     pickle.dump(model, file)
-
-
 
 # 获取当前时间
 end_time = datetime.now()
