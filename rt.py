@@ -18,7 +18,9 @@ interval = "15m"
 
 name = "_"+interval+"_"+interval
 
-path = '/Users/xuanyuan/Documents/ty/RDNTUSDT' + name + '.csv'
+# path = '/Users/xuanyuan/Documents/ty/RDNTUSDT' + name + '.csv'
+
+path = 'merged_csv.csv'
 
 # path = 'merged_' + name + '.csv'
 
