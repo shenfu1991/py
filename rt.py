@@ -6,7 +6,25 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report
 import pickle
 
-data = pd.read_csv('RDNTUSDT_15m_15m.csv')
+from datetime import datetime
+
+# 获取当前时间
+start_time = datetime.now()
+
+# 打印当前时间
+print("当前时间:", start_time)
+
+interval = "15m"
+
+name = "_"+interval+"_"+interval
+
+path = '/Users/xuanyuan/Documents/ty/RDNTUSDT' + name + '.csv'
+
+# path = 'merged_' + name + '.csv'
+
+print(path)
+
+data = pd.read_csv(path)
 
 sm = SMOTE(random_state=42)
 X, y = sm.fit_resample(data.drop('result', axis=1), data['result'])
@@ -23,5 +41,16 @@ model.fit(X_train_scaled, y_train)
 predictions = model.predict(X_test_scaled)
 print(classification_report(y_test, predictions))
 
-with open('model.pkl', 'wb') as file:
+modelName = 'model_' + name + '.pkl'
+
+with open(modelName, 'wb') as file:
     pickle.dump(model, file)
+
+
+
+# 获取当前时间
+end_time = datetime.now()
+
+# 计算并打印执行时间
+execution_time = end_time - start_time
+print("脚本执行耗时: ",execution_time, "秒")

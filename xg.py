@@ -15,7 +15,7 @@ start_time = datetime.now()
 print("当前时间:", start_time)
 
 
-name = "4e"
+name = "3m"
 
 
 path = 'merged_' + name + '.csv'
