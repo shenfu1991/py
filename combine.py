@@ -2,7 +2,7 @@ import pandas as pd
 import glob
 
 
-interval = 'csv'
+interval = 'cs'
 
 # 设置csv文件的路径
 path = r'/Users/xuanyuan/Documents/' + interval # 15m
