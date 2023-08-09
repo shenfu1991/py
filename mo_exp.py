@@ -40,7 +40,7 @@ def process_folder(folder_path):
                     corrected_df.to_csv(file_path, index=False)
                     print(f"Modified file: {file_path}")
                     print(f"Total changes: {changes}")
-                    print(f"Changed rows: {changed_indices}")
+                    # print(f"Changed rows: {changed_indices}")
                 else:
                     print(f"No changes in file: {file_path}")
 
@@ -50,5 +50,5 @@ def process_folder(folder_path):
 
 
 # Specify the folder path (you might need to adjust this based on your local setup)
-folder_path = '/Users/xuanyuan/Documents/rt/'
+folder_path = '/Users/xuanyuan/Documents/cs'
 process_folder(folder_path)
