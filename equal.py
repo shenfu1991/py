@@ -52,7 +52,7 @@ def process_directory(directory_path):
                 process_csv(os.path.join(root, file))
 
 # 使用函数
-directory_path = "/Users/xuanyuan/Documents/123"
+directory_path = "/Users/xuanyuan/Downloads/1-1"
 process_directory(directory_path)
 
 print('done')

@@ -14,7 +14,8 @@ def count_values(csv_file):
 
     return value_counts
 
-csv_file = '/Users/xuanyuan/Downloads/3d-exp/ALPHAUSDT_5m_5m.csv'  # 替换为你的CSV文件路径
+csv_file = '/Users/xuanyuan/Downloads/1-1/merged_3.csv'  # 替换为你的CSV文件路径
+# csv_file = '/Users/xuanyuan/py/merged_3.csv'  # 替换为你的CSV文件路径
 print(csv_file)
 result_counts = count_values(csv_file)
 

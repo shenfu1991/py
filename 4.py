@@ -6,13 +6,33 @@ def balance_data(df):
     short_count = len(df[df['result'] == 'short'])
     long_count = len(df[df['result'] == 'long'])
 
+#最小
+    minCount = long_count
+
+    if short_count < long_count:
+        minCount = short_count
+
+    print(minCount)
+
     # 获取SN和LN的数量
     sn_count = len(df[df['result'] == 'SN'])
     ln_count = len(df[df['result'] == 'LN'])
 
     # 计算需要保留的SN和LN的数量
-    required_sn_count = 4 * short_count
-    required_ln_count = 4 * long_count
+    required_sn_count = 4 * minCount
+    required_ln_count = 4 * minCount
+
+    # 如果short的数量超出所需数量，只保留所需的数量
+    if short_count > minCount:
+        drop_short_count = short_count - minCount
+        short_indices = df[df['result'] == 'short'].index[-drop_short_count:]
+        df = df.drop(short_indices)
+
+    # 如果long的数量超出所需数量，只保留所需的数量
+    if long_count > minCount:
+        drop_long_count = long_count - minCount
+        long_indices = df[df['result'] == 'long'].index[-drop_long_count:]
+        df = df.drop(long_indices)
 
     # 如果SN或LN的数量超出所需数量，只保留所需的数量
     if sn_count > required_sn_count:
@@ -44,6 +64,6 @@ def process_all_csv_in_folder(folder_path):
                 balanced_df.to_csv(file_path, index=False)
                 print(f"Processed {file_path}")
 
-                
 
-process_all_csv_in_folder("/path/to/your/folder")
+
+process_all_csv_in_folder("/Users/xuanyuan/Downloads/4-1")

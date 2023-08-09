@@ -20,7 +20,7 @@ name = "_"+interval+"_"+interval
 
 # path = '/Users/xuanyuan/Documents/ty/RDNTUSDT' + name + '.csv'
 
-path = 'merged_cs.csv'
+path = '/Users/xuanyuan/Downloads/o/merged_4.csv'
 
 
 # path = 'merged_' + name + '.csv'
@@ -28,6 +28,9 @@ path = 'merged_cs.csv'
 print(path)
 
 data = pd.read_csv(path)
+
+# Display the value counts for the 'result' column
+print(data['result'].value_counts())
 
 sm = SMOTE(random_state=42)
 X, y = sm.fit_resample(data.drop('result', axis=1), data['result'])
