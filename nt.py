@@ -21,6 +21,9 @@ print(path)
 
 data = pd.read_csv(path)
 
+# Display the value counts for the 'result' column
+print(data['result'].value_counts())
+
 sm = SMOTE(random_state=42)
 X, y = sm.fit_resample(data.drop('result', axis=1), data['result'])
 
