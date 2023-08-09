@@ -20,7 +20,7 @@ name = "_"+interval+"_"+interval
 
 # path = '/Users/xuanyuan/Documents/ty/RDNTUSDT' + name + '.csv'
 
-path = 'merged_csv_e.csv'
+path = 'merged_cs.csv'
 
 
 # path = 'merged_' + name + '.csv'
