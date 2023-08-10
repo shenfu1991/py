@@ -15,7 +15,7 @@ with open("xgboost_model.pkl", "rb") as pkl_file:
 def predict():
     try:
         # Get JSON data from request
-        data = request.json
+        data = request.json['input']
         
         # Convert JSON data to DataFrame
         df = pd.DataFrame([data])
@@ -29,7 +29,7 @@ def predict():
         # Convert numeric prediction back to label
         label_prediction = label_encoder.inverse_transform(prediction)
         
-        return jsonify({'prediction': label_prediction[0]})
+        return jsonify([label_prediction[0]])
     
     except Exception as e:
         return jsonify({'error': str(e)})
