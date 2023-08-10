@@ -14,7 +14,9 @@ print("当前时间:", start_time)
 
 interval = "15m"
 name = "_"+interval+"_"+interval
-path = 'merged_cs.csv'
+# path = 'merged_cs.csv'
+# path = '/Users/xuanyuan/Downloads/o/merged_4.csv'
+path = "/Users/xuanyuan/Documents/o/merged_4.csv"
 print(path)
 
 # Load the data
