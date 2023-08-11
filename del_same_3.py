@@ -9,7 +9,7 @@ def check_and_drop_duplicates(df):
 
 
 path = "/Users/xuanyuan/Downloads/3d"
-
+print(path)
 # 遍历文件夹及其子文件夹中的所有CSV文件
 for root, dirs, files in os.walk(path):
     for file in files:
