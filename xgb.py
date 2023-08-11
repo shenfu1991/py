@@ -10,7 +10,8 @@ from xgboost import XGBClassifier
 from sklearn.metrics import classification_report
 
 # Load the data
-data_path = '/Users/xuanyuan/Downloads/1-1/merged_4.csv'  # Replace with your actual path
+data_path = '/Users/xuanyuan/Downloads/o/merged_4.csv'  # Replace with your actual path
+print(data_path)
 data = pd.read_csv(data_path)
 
 # Convert target labels to numeric labels
@@ -53,6 +54,7 @@ y_pred = xgb_clf.predict(X_val_scaled)
 
 # Print the classification report
 print(classification_report(y_val, y_pred))
+print(data_path)
 
 # Save the model, scaler and label encoder to a .pkl file
 with open("xgboost_model.pkl", "wb") as pkl_file:
