@@ -34,7 +34,7 @@ params = {
     'objective': 'multi:softmax',
     'num_class': 4,
     'learning_rate': 0.05,
-    'max_depth': 5,
+    'max_depth': 10,
     'subsample': 0.8,
     'colsample_bytree': 0.8,
     'n_estimators': 200,
