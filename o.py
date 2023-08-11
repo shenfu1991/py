@@ -15,8 +15,8 @@ print("当前时间:", start_time)
 interval = "15m"
 name = "_"+interval+"_"+interval
 # path = 'merged_cs.csv'
-# path = '/Users/xuanyuan/Downloads/o/merged_4.csv'
-path = "/Users/xuanyuan/Documents/o/merged_4.csv"
+path = '/Users/xuanyuan/Downloads/4-1/merged_3.csv'
+# path = "/Users/xuanyuan/Documents/1-1/merged_3.csv"
 print(path)
 
 # Load the data
@@ -31,7 +31,7 @@ y = data['result']
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # Train a random forest classifier
-clf = RandomForestClassifier()
+clf = RandomForestClassifier(n_estimators=100, random_state=42)
 clf.fit(X_train, y_train)
 
 # Predict on the test set
