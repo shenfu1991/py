@@ -1,7 +1,7 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-from imblearn.over_sampling import SMOTE
+
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report
 import pickle
@@ -33,10 +33,8 @@ data = pd.read_csv(path)
 # Display the value counts for the 'result' column
 print(data['result'].value_counts())
 
-sm = SMOTE(random_state=42)
-X, y = sm.fit_resample(data.drop('result', axis=1), data['result'])
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(data.drop('result', axis=1), data['result'], test_size=0.2, random_state=42)
 
 scaler = StandardScaler()
 X_train_scaled = scaler.fit_transform(X_train)
