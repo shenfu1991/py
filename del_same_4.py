@@ -9,7 +9,8 @@ def check_and_drop_duplicates(df):
     return df
 
 
-path = "/Users/xuanyuan/Documents/o"
+path = "/Users/xuanyuan/Documents/n"
+print(path)
 
 # 遍历文件夹及其子文件夹中的所有CSV文件
 for root, dirs, files in os.walk(path):

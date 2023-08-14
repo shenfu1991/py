@@ -19,8 +19,8 @@ def balance_data(df):
     ln_count = len(df[df['result'] == 'LN'])
 
     # 计算需要保留的SN和LN的数量
-    required_sn_count = 4 * minCount
-    required_ln_count = 4 * minCount
+    required_sn_count = 10 * minCount
+    required_ln_count = 10 * minCount
 
     # 如果short的数量超出所需数量，只保留所需的数量
     if short_count > minCount:
@@ -66,4 +66,4 @@ def process_all_csv_in_folder(folder_path):
 
 
 
-process_all_csv_in_folder("/Users/xuanyuan/Downloads/3d")
+process_all_csv_in_folder("/Users/xuanyuan/Documents/10")
