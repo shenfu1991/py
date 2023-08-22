@@ -3,7 +3,7 @@ import pickle
 import numpy as np
 
 # Load the model
-with open('model.pkl', 'rb') as file:
+with open('model__15m_15m.pkl', 'rb') as file:
     model = pickle.load(file)
 
 app = Flask(__name__)
@@ -26,4 +26,4 @@ def predict():
     return jsonify(output)
 
 if __name__ == '__main__':
-    app.run(port=5003, debug=True)
+    app.run(port=5000, debug=True)
