@@ -10,7 +10,7 @@ from xgboost import XGBClassifier
 from sklearn.metrics import classification_report
 
 # Load the data
-data_path = '/Users/xuanyuan/py/merged_6_r.csv'  # Replace with your actual path
+data_path = '/Users/xuanyuan/py/merged_6_r_1-1.csv'  # Replace with your actual path
 print(data_path)
 data = pd.read_csv(data_path)
 
