@@ -50,5 +50,5 @@ def process_folder(folder_path):
 
 
 # Specify the folder path (you might need to adjust this based on your local setup)
-folder_path = '/Users/xuanyuan/Downloads/3d'
+folder_path = '/Users/xuanyuan/Downloads/n0'
 process_folder(folder_path)
