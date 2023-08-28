@@ -5,7 +5,11 @@ import pandas as pd
 app = Flask(__name__)
 
 # Load model, scaler and label encoder
-with open("xgboost_model.pkl", "rb") as pkl_file:
+
+modelName = "xgboost_model_xgbn-r.pkl"
+print(modelName)
+
+with open(modelName, "rb") as pkl_file:
     loaded_data = pickle.load(pkl_file)
     model = loaded_data['model']
     scaler = loaded_data['scaler']

@@ -10,7 +10,7 @@ from xgboost import XGBClassifier
 from sklearn.metrics import classification_report
 
 # Load the data
-data_path = '/Users/xuanyuan/py/merged_6_r_1-1.csv'  # Replace with your actual path
+data_path = '/Users/xuanyuan/py/merged_30-r.csv'  # Replace with your actual path
 print(data_path)
 data = pd.read_csv(data_path)
 
@@ -45,10 +45,10 @@ X_val_scaled = scaler.transform(X_val)
 
 params = {
     'booster': 'gbtree',
-    'num_parallel_tree': 100,
-    'subsample': 0.63,
-    'colsample_bynode': 1.0,
-    'learning_rate': 1,
+    # 'num_parallel_tree': 100,
+    # 'subsample': 0.53,
+    # 'colsample_bynode': 1.0,
+    # 'learning_rate': 1,
     'objective': 'multi:softprob',
     'num_class': 4,
     'max_depth': 10,
