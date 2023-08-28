@@ -2,7 +2,7 @@ import os
 import pandas as pd
 
 # 指定文件夹路径
-folder_path = "/Users/xuanyuan/Documents/csv-del"
+folder_path = "/Users/xuanyuan/Documents/30-dum"
 
 print(folder_path)
 

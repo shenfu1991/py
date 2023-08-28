@@ -5,7 +5,7 @@ import pandas as pd
 app = Flask(__name__)
 
 # Load the model, label encoder from the pickle file
-with open("xgboost_model_xgb.pkl", "rb") as pkl_file:
+with open("xgboost_model_xgb_r.pkl", "rb") as pkl_file:
     data = pickle.load(pkl_file)
     model = data['model']
     label_encoder = data['label_encoder']

@@ -3,7 +3,7 @@ import glob
 
 
 
-interval = '30-r'
+interval = '30-dum'
 
 # 设置csv文件的路径
 path = r'/Users/xuanyuan/Documents/' + interval # 15m

@@ -10,7 +10,7 @@ from xgboost import XGBClassifier
 from sklearn.metrics import classification_report
 
 # Load the data
-data_path = '/Users/xuanyuan/py/merged_30-dum.csv'  # Replace with your actual path
+data_path = '/Users/xuanyuan/py/merged_30.csv'  # Replace with your actual path
 print(data_path)
 data = pd.read_csv(data_path)
 
@@ -32,7 +32,7 @@ X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_st
 
 params = {
     'booster': 'gbtree',
-    # 'num_parallel_tree': 100,
+    'num_parallel_tree': 10,
     # 'subsample': 0.53,
     # 'colsample_bynode': 1.0,
     # 'learning_rate': 1,
@@ -58,6 +58,6 @@ print(classification_report(y_val, y_pred))
 print(data_path)
 
 # Save the model, scaler and label encoder to a .pkl file
-with open("xgboost_model.pkl", "wb") as pkl_file:
+with open("xgboost_model_xgb.pkl", "wb") as pkl_file:
     pickle.dump({'model': xgb_clf, 'label_encoder': label_encoder}, pkl_file)
 
