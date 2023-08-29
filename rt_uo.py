@@ -20,13 +20,9 @@ name = "_"+interval+"_"+interval
 
 # path = '/Users/xuanyuan/Documents/ty/RDNTUSDT' + name + '.csv'
 
-<<<<<<< HEAD
-# path = 'merged_6_r.csv'
-path = "/Users/xuanyuan/downloads/1-1/merged_3.csv"
-=======
+
 path = 'merged_4h.csv'
 # path = "/Users/xuanyuan/Documents/o/merged_3.csv"
->>>>>>> c778514cef8447eaf977b6cf16e7de0a22e02c3c
 
 
 # path = 'merged_' + name + '.csv'
