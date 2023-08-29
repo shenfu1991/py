@@ -19,7 +19,7 @@ print("当前时间:", start_time)
 
 
 # Load the data
-data_path = '/Users/xuanyuan/py/merged_30-dum.csv'  # Replace with your actual path
+data_path = '/Users/xuanyuan/py/merged_30-r.csv'  # Replace with your actual path
 print(data_path)
 data = pd.read_csv(data_path)
 
@@ -55,7 +55,7 @@ X_val_scaled = scaler.transform(X_val)
 
 params = {
     'booster': 'gbtree',
-    'num_parallel_tree': 10,
+    'num_parallel_tree': 20,
     # 'subsample': 0.53,
     # 'colsample_bynode': 1.0,
     # 'learning_rate': 1,
@@ -64,6 +64,8 @@ params = {
     # 'max_depth': 10,
     'random_state': 42,
 }
+
+print(params)
 
 
 # Train XGBoost with the parameters
