@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 # Load model, scaler and label encoder
 
-modelName = "xgboost_model_xgbn_dum.pkl"
+modelName = "xgboost_model-155.pkl"
 print(modelName)
 
 with open(modelName, "rb") as pkl_file:

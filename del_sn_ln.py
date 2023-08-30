@@ -22,6 +22,6 @@ def process_csv_files(directory):
             print(f"Processed and saved {new_filename}")
 
 # 使用方法
-directory = "/Users/xuanyuan/Documents/8-17-30m"  # 例如：directory = "/path/to/your/csv_files"
+directory = "/Users/xuanyuan/Documents/8-17-15m"  # 例如：directory = "/path/to/your/csv_files"
 print(directory)
 process_csv_files(directory)
