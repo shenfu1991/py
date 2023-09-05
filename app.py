@@ -6,8 +6,9 @@ app = Flask(__name__)
 
 # Load model, scaler and label encoder
 
-modelName = "xgboost_model-155.pkl"
+modelName = "xgboost_model.pkl"
 print(modelName)
+feature_names = ['iRank', 'minRate', 'maxRate', 'volatility', 'sharp', 'signal', 'minR', 'maxR']
 
 with open(modelName, "rb") as pkl_file:
     loaded_data = pickle.load(pkl_file)
@@ -22,7 +23,7 @@ def predict():
         data = request.json['input']
         
         # Convert JSON data to DataFrame
-        df = pd.DataFrame([data])
+        df = pd.DataFrame([data], columns=feature_names)
         
         # Scale the data
         scaled_data = scaler.transform(df)

@@ -12,7 +12,7 @@ def process_csv_files(directory):
             df = pd.read_csv(filepath)
             
             # 删除result列中值为SN或LN的行
-            df = df[~df['result'].isin(['SN', 'LN'])]
+            df = df[~df['result'].isin(['short', 'long'])]
             
             # 保存处理后的数据到新文件
             new_filename = filename.split('.')[0] + '_processed.csv'
@@ -23,6 +23,6 @@ def process_csv_files(directory):
             os.remove(filepath)
 
 # 使用方法
-directory = "/Users/xuanyuan/Documents/555"  # 例如：directory = "/path/to/your/csv_files"
+directory = "/Users/xuanyuan/Documents/55"  # 例如：directory = "/path/to/your/csv_files"
 print(directory)
 process_csv_files(directory)

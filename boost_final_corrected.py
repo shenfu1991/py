@@ -10,7 +10,7 @@ from xgboost import XGBClassifier
 from sklearn.metrics import classification_report
 
 # Load the data
-data_path = '/Users/xuanyuan/py/merged_30-dum.csv'  # Replace with your actual path
+data_path = '/Users/xuanyuan/py/merged_555.csv'  # Replace with your actual path
 print(data_path)
 data = pd.read_csv(data_path)
 
@@ -45,19 +45,20 @@ X_val_scaled = scaler.transform(X_val)
 #     'eval_metric': 'mlogloss'
 # }
 
-class_weights = {3: 10,2:10,0:1, 1: 1}  # This needs to be updated with the actual encoded labels
+class_weights = {3: 100,2:100,0:1, 1: 1}  # This needs to be updated with the actual encoded labels
 
 params = {
     'booster': 'gbtree',
-    # 'num_parallel_tree': 100,
+    # 'num_parallel_tree': 10,
     # 'subsample': 0.53,
     # 'colsample_bynode': 1.0,
     # 'learning_rate': 1,
     'objective': 'multi:softprob',
     'num_class': 4,
-    'max_depth': 10,
+    # 'max_depth': 10,
     'random_state': 42,
 }
+
 
 
 

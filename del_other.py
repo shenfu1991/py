@@ -2,10 +2,10 @@ import os
 import pandas as pd
 
 # 文件夹路径
-folder_path = "/Users/xuanyuan/Downloads/7-12"
+folder_path = "/Users/xuanyuan/Downloads/yu"
 
 # 需要删除的列
-columns_to_drop = ["open", "high", "low", "rate", "volume"]
+columns_to_drop = ["open", "high", "low", "rate", "volume","volatility","sharp","signal"]
 
 # 遍历文件夹中的文件，包括所有子文件夹
 for root, dirs, files in os.walk(folder_path):
