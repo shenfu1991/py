@@ -19,7 +19,7 @@ print("当前时间:", start_time)
 
 
 # Load the data
-data_path = '/Users/xuanyuan/py/merged_5-r.csv'  # Replace with your actual path
+data_path = '/Users/xuanyuan/py/merged_5m-r.csv'  # Replace with your actual path
 print(data_path)
 data = pd.read_csv(data_path)
 
@@ -61,7 +61,7 @@ params = {
     # 'learning_rate': 1,
     'objective': 'multi:softprob',
     'num_class': 4,
-    # 'max_depth': 10,
+    'max_depth': 10,
     'random_state': 42,
 }
 

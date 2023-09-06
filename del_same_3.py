@@ -3,12 +3,12 @@ import pandas as pd
 
 # 用于检查和删除具有相同特定列值的相邻行的函数
 def check_and_drop_duplicates(df):
-    cols_to_check = ['volatility', 'sharp', 'signal']
+    cols_to_check = ['volatility', 'shortAvg', 'longAvg']
     df = df.loc[~(df[cols_to_check].shift() == df[cols_to_check]).all(axis=1)]
     return df
 
 
-path = "/Users/xuanyuan/Documents/5-r"
+path = "/Users/xuanyuan/Documents/5m-r"
 print(path)
 # 遍历文件夹及其子文件夹中的所有CSV文件
 for root, dirs, files in os.walk(path):
