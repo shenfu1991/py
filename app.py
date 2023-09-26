@@ -6,10 +6,10 @@ app = Flask(__name__)
 
 # Load model, scaler and label encoder
 
-modelName = "xgboost_model-k-dum.pkl"
+modelName = "xgboost_model.pkl"
 print(modelName)
-# feature_names = ['iRank', 'minRate', 'maxRate', 'volatility', 'sharp', 'signal', 'minR', 'maxR']
-feature_names = ['shortAvg','longAvg','volatility','diff']
+feature_names = ['rank', 'minR', 'maxR', 'minDiffR', 'maxDiffR', 'topRank']
+# feature_names = ['shortAvg','longAvg','volatility','diff']
 
 with open(modelName, "rb") as pkl_file:
     loaded_data = pickle.load(pkl_file)
