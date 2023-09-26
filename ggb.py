@@ -19,7 +19,7 @@ print("当前时间:", start_time)
 
 
 # Load the data
-data_path = '/Users/xuanyuan/py/merged_5m-r.csv'  # Replace with your actual path
+data_path = '/Users/xuanyuan/py/merged_5mls.csv'  # Replace with your actual path
 print(data_path)
 data = pd.read_csv(data_path)
 
@@ -74,11 +74,18 @@ xgb_clf.fit(X_train_scaled, y_train,
             early_stopping_rounds=10, 
             eval_set=[(X_val_scaled, y_val)])
 
+import numpy as np
+
 # Predict on the validation set
 y_pred = xgb_clf.predict(X_val_scaled)
 
-# Print the classification report
+# If y_pred is two-dimensional (e.g., probabilities for each class), convert it to one-dimensional
+if len(y_pred.shape) > 1 and y_pred.shape[1] > 1:
+    y_pred = np.argmax(y_pred, axis=1)
+
+# Now you can use the classification_report
 print(classification_report(y_val, y_pred))
+
 print(data_path)
 
 # Save the model, scaler and label encoder to a .pkl file

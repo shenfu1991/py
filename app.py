@@ -1,12 +1,13 @@
 from flask import Flask, request, jsonify
 import pickle
 import pandas as pd
+import numpy as np
 
 app = Flask(__name__)
 
 # Load model, scaler and label encoder
 
-modelName = "xgboost_model-k-dum.pkl"
+modelName = "xgboost_model.pkl"
 print(modelName)
 # feature_names = ['iRank', 'minRate', 'maxRate', 'volatility', 'sharp', 'signal', 'minR', 'maxR']
 feature_names = ['shortAvg','longAvg','volatility','diff']
@@ -32,8 +33,16 @@ def predict():
         # Predict
         prediction = model.predict(scaled_data)
         
+        # # Convert numeric prediction back to label
+        # label_prediction = label_encoder.inverse_transform(prediction)
+
+      
+        if len(prediction.shape) > 1 and prediction.shape[1] > 1:
+             prediction = np.argmax(prediction, axis=1)
+
         # Convert numeric prediction back to label
         label_prediction = label_encoder.inverse_transform(prediction)
+
         
         return jsonify([label_prediction[0]])
     

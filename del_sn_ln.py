@@ -23,6 +23,6 @@ def process_csv_files(directory):
             os.remove(filepath)
 
 # 使用方法
-directory = "/Users/xuanyuan/Documents/8-12-k-5m-t"  # 例如：directory = "/path/to/your/csv_files"
+directory = "/Users/xuanyuan/Documents/5mls"  # 例如：directory = "/path/to/your/csv_files"
 print(directory)
 process_csv_files(directory)
