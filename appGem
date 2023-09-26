@@ -1,0 +1,97 @@
+#!/bin/bash 
+
+models="xgboost_model-k.pkl xgboost_model-k-r.pkl xgboost_model-k-dum.pkl xgboost_model-555.pkl xgboost_model-555-100.pkl xgboost_model_15m_re.pkl"
+
+idx=1
+port=6601
+
+
+
+for name in $models
+
+do
+
+file="a"$idx
+
+appName="app"$idx
+
+cat>/root/$file.ini<<EOF
+
+[uwsgi]
+module = $file:$appName
+master = true
+processes = 1
+reload-on-rss = 300
+http = :$port
+chmod-socket = 660
+vacuum = true
+die-on-term = true
+
+EOF
+
+if [ $idx -ge 4 ]; then
+    my_var="['iRank', 'minRate', 'maxRate', 'volatility', 'sharp', 'signal', 'minR', 'maxR']"
+else
+    my_var="['shortAvg','longAvg','volatility','diff']"
+fi
+
+cat>/root/$file.py<<EOF
+
+import asyncio
+from flask import Flask, request, jsonify
+import pickle
+import pandas as pd
+
+$appName = Flask(__name__)
+
+model = None
+scaler = None 
+label_encoder = None
+
+async def load_model():
+
+  global model, scaler, label_encoder,feature_names
+
+  if not model:
+
+    with open('$name', 'rb') as f:
+      loaded_data = pickle.load(f)
+      model = loaded_data['model']
+      scaler = loaded_data['scaler'] 
+      label_encoder = loaded_data['label_encoder']
+      feature_names = $my_var
+
+async def predict(data):
+
+  await load_model()
+
+  df = pd.DataFrame([data], columns=feature_names)
+
+  scaled_data = scaler.transform(df)
+
+  prediction = model.predict(scaled_data)
+
+  label_prediction = label_encoder.inverse_transform(prediction)
+
+  return label_prediction[0]
+
+
+@$appName.route('/predict', methods=['POST'])
+async def predict_handler():
+
+  data = request.json['input']
+  result = await asyncio.gather(predict(data))
+  return jsonify(result)
+
+if __name__ == '__main__':
+    $appName.run()
+
+
+
+EOF
+
+
+((idx = idx + 1))
+((port = port + 1))
+
+done
