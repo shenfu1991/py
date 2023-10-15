@@ -2,14 +2,16 @@ from flask import Flask, request, jsonify
 import pickle
 import pandas as pd
 import numpy as np
+import xgboost
 
 app = Flask(__name__)
 
 # Load model, scaler and label encoder
 
-modelName = "xgboost_model.pkl"
+modelName = "xgboost_model-l.pkl"
 print(modelName)
-feature_names = ['rank', 'minR', 'maxR', 'minDiffR', 'maxDiffR', 'topRank']
+print(xgboost.__version__)
+feature_names = ['rank','upDownMa23','volatility','sharp','signal']
 # feature_names = ['shortAvg','longAvg','volatility','diff']
 
 with open(modelName, "rb") as pkl_file:

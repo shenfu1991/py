@@ -19,7 +19,7 @@ print("当前时间:", start_time)
 
 
 # Load the data
-data_path = '/Users/xuanyuan/py/merged_csv-v2.csv'  # Replace with your actual path
+data_path = '/Users/xuanyuan/py/merged_csv.csv'  # Replace with your actual path
 print(data_path)
 data = pd.read_csv(data_path)
 
@@ -55,13 +55,13 @@ X_val_scaled = scaler.transform(X_val)
 
 params = {
     'booster': 'gbtree',
-    'num_parallel_tree': 10,
+    # 'num_parallel_tree': 10,
     # 'subsample': 0.53,
     # 'colsample_bynode': 1.0,
     # 'learning_rate': 1,
     'objective': 'multi:softprob',
     'num_class': 4,
-    # 'max_depth': 100,
+    # 'max_depth': 10,
     'random_state': 42,
 }
 
