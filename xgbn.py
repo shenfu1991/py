@@ -1,7 +1,3 @@
-
-# Load the data
-# data_path = '/Users/xuanyuan/Downloads/o/merged_3.csv'  # Replace with your actual path
-
 import pandas as pd
 import pickle
 from sklearn.model_selection import train_test_split
@@ -17,9 +13,8 @@ start_time = datetime.now()
 # 打印当前时间
 print("当前时间:", start_time)
 
-
 # Load the data
-data_path = '/Users/xuanyuan/py/merged_csv.csv'  # Replace with your actual path
+data_path = '/Users/xuanyuan/py/merged_pro-2.csv'  # Replace with your actual path
 print(data_path)
 data = pd.read_csv(data_path)
 
@@ -39,34 +34,15 @@ scaler = StandardScaler()
 X_train_scaled = scaler.fit_transform(X_train)
 X_val_scaled = scaler.transform(X_val)
 
-
-
-# params = {
-#     # 'booster': 'gbtree',
-#     # 'num_parallel_tree': 100,
-#     # 'subsample': 0.63,
-#     # 'colsample_bynode': 1.0,
-#     # 'learning_rate': 1,
-#     'objective': 'multi:softprob',
-#     'num_class': 4,
-#     # 'max_depth': 10,
-#     'random_state': 42,
-# }
-
 params = {
     'booster': 'gbtree',
-    # 'num_parallel_tree': 10,
-    # 'subsample': 0.53,
-    # 'colsample_bynode': 1.0,
-    # 'learning_rate': 1,
     'objective': 'multi:softprob',
     'num_class': 4,
-    # 'max_depth': 10,
+    'max_depth': 10,
     'random_state': 42,
 }
 
 print(params)
-
 
 # Train XGBoost with the parameters
 xgb_clf = XGBClassifier(**params)

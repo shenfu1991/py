@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 # Load model, scaler and label encoder
 
-modelName = "xgboost_model-l.pkl"
+modelName = "xgboost_model.pkl"
 print(modelName)
 print(xgboost.__version__)
 feature_names = ['rank','upDownMa23','volatility','sharp','signal']
@@ -52,5 +52,5 @@ def predict():
         return jsonify({'error': str(e)})
 
 if __name__ == "__main__":
-    app.run(port=6600,debug=True)
+    app.run(port=6601,debug=True)
 
