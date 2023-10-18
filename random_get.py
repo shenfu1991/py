@@ -3,7 +3,7 @@ import os
 import glob
 
 # 指定包含CSV文件的文件夹路径
-path = '/Users/xuanyuan/Documents/op'
+path = '/Users/xuanyuan/Documents/csv-sm/n'
 all_files = glob.glob(os.path.join(path, "*.csv"))
 
 list_of_dfs = []
