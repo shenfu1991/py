@@ -2,7 +2,7 @@ import pandas as pd
 import pickle
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler, LabelEncoder
-from xgboost import XGBClassifier
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report
 
 from datetime import datetime
@@ -14,7 +14,7 @@ start_time = datetime.now()
 print("当前时间:", start_time)
 
 # Load the data
-data_path = '/Users/xuanyuan/py/merged_pro-2.csv'  # Replace with your actual path
+data_path = '/Users/xuanyuan/py/merged_tt.csv'  # Replace with your actual path
 print(data_path)
 data = pd.read_csv(data_path)
 
@@ -45,11 +45,12 @@ params = {
 print(params)
 
 # Train XGBoost with the parameters
-xgb_clf = XGBClassifier(**params)
-xgb_clf.fit(X_train_scaled, y_train,early_stopping_rounds=10,eval_set=[(X_val_scaled, y_val)])
+rf_clf = RandomForestClassifier(n_estimators=100, random_state=42)
+rf_clf.fit(X_train_scaled, y_train)
+      
 
 # Predict on the validation set
-y_pred = xgb_clf.predict(X_val_scaled)
+y_pred = rf_clf.predict(X_val_scaled)
 
 # Print the classification report
 print(classification_report(y_val, y_pred))
@@ -57,7 +58,7 @@ print(data_path)
 
 # Save the model, scaler and label encoder to a .pkl file
 with open("xgboost_model.pkl", "wb") as pkl_file:
-    pickle.dump({'model': xgb_clf, 'scaler': scaler, 'label_encoder': label_encoder}, pkl_file)
+    pickle.dump({'model': rf_clf, 'scaler': scaler, 'label_encoder': label_encoder}, pkl_file)
 
     # 获取当前时间
 end_time = datetime.now()
