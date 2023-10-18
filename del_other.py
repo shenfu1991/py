@@ -5,7 +5,7 @@ import pandas as pd
 folder_path = "/Users/xuanyuan/Downloads/yu"
 
 # 需要删除的列
-columns_to_drop = ["open", "high", "low", "rate", "volume","volatility","sharp","signal"]
+columns_to_drop = ["rank"]
 
 # 遍历文件夹中的文件，包括所有子文件夹
 for root, dirs, files in os.walk(folder_path):

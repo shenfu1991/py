@@ -14,7 +14,7 @@ start_time = datetime.now()
 print("当前时间:", start_time)
 
 # Load the data
-data_path = '/Users/xuanyuan/py/merged_pro-2.csv'  # Replace with your actual path
+data_path = '/Users/xuanyuan/py/merged_pro.csv'  # Replace with your actual path
 print(data_path)
 data = pd.read_csv(data_path)
 
