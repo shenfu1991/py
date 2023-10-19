@@ -11,7 +11,7 @@ app = Flask(__name__)
 modelName = "xgboost_model.pkl"
 print(modelName)
 print(xgboost.__version__)
-feature_names = ['rank','upDownMa23','volatility','sharp','signal']
+feature_names = ['rsi','so','mfi','cci']
 # feature_names = ['shortAvg','longAvg','volatility','diff']
 
 with open(modelName, "rb") as pkl_file:

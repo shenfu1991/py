@@ -1,4 +1,5 @@
 import pandas as pd
+from sklearn.utils import resample
 import pickle
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler, LabelEncoder
@@ -13,10 +14,29 @@ start_time = datetime.now()
 # 打印当前时间
 print("当前时间:", start_time)
 
-# Load the data
-data_path = '/Users/xuanyuan/py/merged_csv.csv'  # Replace with your actual path
-print(data_path)
-data = pd.read_csv(data_path)
+# 加载数据
+data_file_path = 'merged_csv.csv'  # 请替换为你的文件路径
+df = pd.read_csv(data_file_path)
+
+# 设置每个类别的样本大小
+sample_size_per_class_SN_LN = 500000
+sample_size_per_class = 100000
+
+# 对每个类别进行随机抽样
+df_SN_sample = df[df['result'] == 'SN'].sample(n=sample_size_per_class_SN_LN, random_state=42)
+df_LN_sample = df[df['result'] == 'LN'].sample(n=sample_size_per_class_SN_LN, random_state=42)
+df_short_sample = df[df['result'] == 'short'].sample(n=sample_size_per_class, replace=True, random_state=42)
+df_long_sample = df[df['result'] == 'long'].sample(n=sample_size_per_class, replace=True, random_state=42)
+
+# 合并抽样得到的数据
+df_sample = pd.concat([df_SN_sample, df_LN_sample, df_short_sample, df_long_sample])
+
+# 打乱数据顺序
+data = df_sample.sample(frac=1, random_state=42).reset_index(drop=True)
+
+# 检查新数据集的标签分布
+label_distribution_sample = data['result'].value_counts()
+print("新数据集的标签分布：\n", label_distribution_sample)
 
 # Convert target labels to numeric labels
 label_encoder = LabelEncoder()
@@ -35,25 +55,23 @@ X_train_scaled = scaler.fit_transform(X_train)
 X_val_scaled = scaler.transform(X_val)
 
 params = {
-    'booster': 'gbtree',
-    'objective': 'multi:softprob',
-    # 'num_class': 4,
-    'max_depth': 10,
-    'random_state': 42,
+    'n_estimators': 10000,
+    'learning_rate': 0.1,
+    'max_depth': 7,
+    'early_stopping_rounds': 10
 }
 
 print(params)
 
 # Train XGBoost with the parameters
 xgb_clf = XGBClassifier(**params)
-xgb_clf.fit(X_train_scaled, y_train,early_stopping_rounds=10,eval_set=[(X_val_scaled, y_val)])
+xgb_clf.fit(X_train_scaled, y_train,eval_set=[(X_val_scaled, y_val)])
 
 # Predict on the validation set
 y_pred = xgb_clf.predict(X_val_scaled)
 
 # Print the classification report
 print(classification_report(y_val, y_pred))
-print(data_path)
 
 # Save the model, scaler and label encoder to a .pkl file
 with open("xgboost_model.pkl", "wb") as pkl_file:
@@ -65,5 +83,3 @@ end_time = datetime.now()
 # 计算并打印执行时间
 execution_time = end_time - start_time
 print("脚本执行耗时: ",execution_time, "秒")
-
-
