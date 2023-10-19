@@ -11,7 +11,7 @@ app = Flask(__name__)
 modelName = "xgboost_model.pkl"
 print(modelName)
 print(xgboost.__version__)
-feature_names = ['rsi','so','mfi','cci']
+# feature_names = ['rsi','so','mfi','cci']
 # feature_names = ['shortAvg','longAvg','volatility','diff']
 
 with open(modelName, "rb") as pkl_file:
@@ -27,7 +27,7 @@ def predict():
         data = request.json['input']
         
         # Convert JSON data to DataFrame
-        df = pd.DataFrame([data], columns=feature_names)
+        df = pd.DataFrame([data])
         
         # Scale the data
         scaled_data = scaler.transform(df)
