@@ -5,6 +5,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report
 import pickle
+from sklearn.datasets import load_iris
 
 from datetime import datetime
 
@@ -38,13 +39,6 @@ df_sample = df_sample.sample(frac=1, random_state=42).reset_index(drop=True)
 label_distribution_sample = df_sample['result'].value_counts()
 print("新数据集的标签分布：\n", label_distribution_sample)
 
-
-
-
-# 特征交叉
-df_sample['rsi_so'] = df_sample['rsi'] * df_sample['so']
-df_sample['mfi_cci'] = df_sample['mfi'] * df_sample['cci']
-
 # 数据预处理
 X = df_sample.drop('result', axis=1)
 y = df_sample['result']
@@ -61,15 +55,29 @@ scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)
 X_val = scaler.transform(X_val)
 
-# 使用随机森林模型
-clf = RandomForestClassifier(n_estimators=100, random_state=42)
-clf.fit(X_train, y_train)
+# ...（其它导入和代码）
+
+# 创建随机森林模型并训练
+from sklearn.ensemble import AdaBoostClassifier
+clf = AdaBoostClassifier(n_estimators=100)
+clf.fit(X_train, y_train)  # 假设 X_train 和 y_train 是你的训练数据和标签
+
+# # 获取特征重要性
+# feature_importances = clf.feature_importances_
+
+# # 打印特征重要性
+# feature_names = [f'Feature_{i}' for i in range(X_train.shape[1])]  # 使用数字来标识特征
+# importance_df = pd.DataFrame({'Feature': feature_names, 'Importance': feature_importances})
+# print(importance_df.sort_values('Importance', ascending=False))
+
+
 
 # 性能评估
 # 性能评估
 y_pred = clf.predict(X_val)
 target_names_str = [str(cls) for cls in label_encoder.classes_]
 print("分类报告：\n", classification_report(y_val, y_pred, target_names=target_names_str))
+
 
 # Save the model, scaler and label encoder to a .pkl file
 with open("xgboost_model.pkl", "wb") as pkl_file:
