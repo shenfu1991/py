@@ -15,7 +15,7 @@ start_time = datetime.now()
 print("当前时间:", start_time)
 
 # 加载数据
-data_file_path = 'merged_dum.csv'  # 请替换为你的文件路径
+data_file_path = 'merged_30m-dum.csv'  # 请替换为你的文件路径
 df = pd.read_csv(data_file_path)
 print(data_file_path)
 
