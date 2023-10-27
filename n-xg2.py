@@ -15,10 +15,10 @@ start_time = datetime.now()
 print("当前时间:", start_time)
 
 # 加载数据
-data_file_path = 'merged_5m-dum.csv'  # 请替换为你的文件路径
+
+data_file_path = '/Users/xuanyuan/Documents/csv/11.csv'  # 请替换为你的文件路径
 df = pd.read_csv(data_file_path)
 print(data_file_path)
-
 
 
 import csv
@@ -46,27 +46,6 @@ counts = count_target_values(data_file_path, 'result')
 for value, count in counts.items():
     print(f"{value}: {count}")
 
-
-
-
-
-
-
-# # 设置每个类别的样本大小
-# sample_size_per_class_SN_LN = 3000000
-# sample_size_per_class = 600000
-
-# # 对每个类别进行随机抽样
-# df_SN_sample = df[df['result'] == 'SN'].sample(n=sample_size_per_class_SN_LN, random_state=42)
-# df_LN_sample = df[df['result'] == 'LN'].sample(n=sample_size_per_class_SN_LN, random_state=42)
-# df_short_sample = df[df['result'] == 'short'].sample(n=sample_size_per_class, replace=True, random_state=42)
-# df_long_sample = df[df['result'] == 'long'].sample(n=sample_size_per_class, replace=True, random_state=42)
-
-# # 合并抽样得到的数据
-# df_sample = pd.concat([df_SN_sample, df_LN_sample, df_short_sample, df_long_sample])
-
-# 打乱数据顺序
-# data = df_sample.sample(frac=1, random_state=42).reset_index(drop=True)
 data = df
 # 检查新数据集的标签分布
 label_distribution_sample = data['result'].value_counts()
