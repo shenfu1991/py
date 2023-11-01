@@ -15,6 +15,7 @@ start_time = datetime.now()
 print("当前时间:", start_time)
 
 # 加载数据
+
 data_file_path = '/Users/xuanyuan/Documents/csv/11.csv'  # 请替换为你的文件路径
 df = pd.read_csv(data_file_path)
 print(data_file_path)

@@ -5,6 +5,7 @@ import pandas as pd
 # folder_path = '/Users/xuanyuan/Documents/csv-big'
 folder_path = '/Users/xuanyuan/Downloads/d/ls'
 
+
 # 遍历文件夹，找到所有CSV文件
 for filename in os.listdir(folder_path):
     if filename.endswith('.csv'):

@@ -1,6 +1,7 @@
 import os
 import pandas as pd
 
+
 def remove_similar_rows(df, columns, threshold=0.2):
     to_drop = []
     for i in range(1, len(df)):
@@ -30,9 +31,16 @@ def process_all_csv_in_folder(folder_path, output_folder, columns_to_check):
 columns_to_check = ['rsi', 'so', 'mfi', 'cci']
 
 # Folder containing the CSV files
+<<<<<<< HEAD
+input_folder = '/Users/xuanyuan/Documents/30m/ls'
+
+# Folder to save the filtered CSV files
+output_folder = '/Users/xuanyuan/Documents/30m-dum'
+=======
 input_folder = '/Users/xuanyuan/Documents/5m-big-2'
 
 # Folder to save the filtered CSV files
 output_folder = '/Users/xuanyuan/Documents/5m-dum'
+>>>>>>> 2ba8b88e10454f7a2b20e032d4c0e58cee6c4802
 
 process_all_csv_in_folder(input_folder, output_folder, columns_to_check)
