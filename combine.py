@@ -3,10 +3,10 @@ import glob
 
 
 
-interval = 'tr'
+interval = '4h'
 
 # 设置csv文件的路径
-path = r'/Users/xuanyuan/Documents/' + interval # 15m
+path = r'/Users/xuanyuan/Downloads/d/' + interval # 15m
 
 print(path)
 

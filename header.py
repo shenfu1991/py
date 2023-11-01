@@ -2,10 +2,10 @@ import os
 import pandas as pd
 
 # 指定你要查找的文件夹路径
-directory = '/Users/xuanyuan/Downloads/all/30mv2'
+directory = '/Users/xuanyuan/Downloads/d/4h'
 
 # 需要检查的列名
-columns = ['timestamp', 'current', 'open', 'high', 'low', 'rate', 'volume', 'volatility', 'sharp', 'signal']
+columns = ['stamp','current','long','short','topR','bottomR','longR','shortR','earnE','status']
 
 # 列名转为一行字符串，用逗号分隔
 header_line = ','.join(columns) + '\n'
